@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-20T06:32:05.292Z",
+  "exportedAt": "2026-08-20T06:34:07.694Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -1052,7 +1052,7 @@
         "store": "Wendy's Caltex Mega Station",
         "description": "Make the order number bigger in the receipt",
         "pointPerson": "Harmon",
-        "status": "For Client Confirmation",
+        "status": "Completed",
         "startDate": "2026-08-21",
         "endDate": "2026-08-21",
         "reviseEndDate": "",
@@ -1064,6 +1064,10 @@
           {
             "date": "8/19/2026, 8:14:31 AM",
             "text": "Update the receipt today, for client confirmation"
+          },
+          {
+            "date": "8/20/2026, 2:33:42 PM",
+            "text": "Receipt update is ok as per S' Zedric"
           }
         ]
       },
@@ -1159,6 +1163,10 @@
           {
             "date": "8/20/2026, 8:34:28 AM",
             "text": "Check in with Torikizoku IT regarding plugin update, as per M' Quennie no restart encountered last night, but the PWD discount doesn't have the option to add PWD details."
+          },
+          {
+            "date": "8/20/2026, 2:33:07 PM",
+            "text": "5 transaction last night, currently 2 transactions as of this time"
           }
         ]
       }
