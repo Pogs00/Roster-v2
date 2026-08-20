@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-20T05:24:19.989Z",
+  "exportedAt": "2026-08-20T05:25:20.048Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -292,7 +292,7 @@
           "id": "t_t82kmkuq",
           "date": "2026-08-20",
           "text": "Torikizoku KDS run through",
-          "status": "not-started"
+          "status": "in-progress"
         },
         {
           "id": "t_c1k1ifz3",
