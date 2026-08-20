@@ -1999,11 +1999,11 @@
       </div>
       <div class="manage-section">
         <h4>Default email template</h4>
-        <p class="hint">Used when you click the ✉ icon next to a teammate on the roster. Use <code>{name}</code> anywhere you want their name inserted — the draft opens in your email client ready for you to add the details.</p>
+        <p class="hint">Used when you click the ✉ icon next to a teammate on the roster. Use <code>{name}</code> for their name. Use <code>{week_range}</code> for the current week's date range, <code>{tasks_by_status}</code> for a count per status (e.g. "🟩 Completed: 10"), and <code>{week_tasks}</code> for a full day-by-day list of this week's tasks — all pulled live from your saved schedule data, no manual typing needed. Email bodies can't carry real font color, so each status and its Delayed/On Time flag is shown with a colored emoji (🟢 on time, 🔴 delayed) instead.</p>
         <label for="emailTemplateSubjectInput" style="font-size:12.5px;font-weight:600;display:block;margin-bottom:4px;">Subject</label>
         <input type="text" id="emailTemplateSubjectInput" placeholder="Quick check-in, {name}" style="width:100%;font-family:'Inter',sans-serif;font-size:13px;padding:8px 10px;border-radius:8px;border:1px solid var(--border);background:var(--surface-2);color:var(--ink);margin-bottom:10px;" />
         <label for="emailTemplateBodyInput" style="font-size:12.5px;font-weight:600;display:block;margin-bottom:4px;">Body</label>
-        <textarea id="emailTemplateBodyInput" rows="5" placeholder="Hi {name}," style="width:100%;font-family:'Inter',sans-serif;font-size:13px;padding:8px 10px;border-radius:8px;border:1px solid var(--border);background:var(--surface-2);color:var(--ink);resize:vertical;"></textarea>
+        <textarea id="emailTemplateBodyInput" rows="9" placeholder="Hi {name}," style="width:100%;font-family:'Inter',sans-serif;font-size:13px;padding:8px 10px;border-radius:8px;border:1px solid var(--border);background:var(--surface-2);color:var(--ink);resize:vertical;"></textarea>
       </div>
     </div>
   </div>
@@ -4667,7 +4667,7 @@
   }
 
   const DEFAULT_EMAIL_TEMPLATE_SUBJECT = 'Quick check-in, {name}';
-  const DEFAULT_EMAIL_TEMPLATE_BODY = 'Hi {name},\nPlease update your task status daily, see your task status for reference:\nComplete:\nIn Progress:\nNot Started:\nCancelled:\nFor Continuation:\n\nThanks!';
+  const DEFAULT_EMAIL_TEMPLATE_BODY = 'Hi {name},\n\nHere is your task summary for the week of {week_range}, pulled from the schedule:\n\n{tasks_by_status}\n\nFull day-by-day list (with Delayed / On Time status):\n{week_tasks}\n\nPlease let me know if anything above needs to be updated.\n\nThanks!';
   let emailTemplateSubject = DEFAULT_EMAIL_TEMPLATE_SUBJECT;
   let emailTemplateBody = DEFAULT_EMAIL_TEMPLATE_BODY;
 
@@ -4683,8 +4683,98 @@
     if(bodyInput) bodyInput.value = emailTemplateBody;
   }
 
+  // Plain-text mailto bodies can't carry real font color, so status/delay
+  // colors are represented with the nearest colored square/circle emoji —
+  // most email clients render these in color even in a plain-text message.
+  const COLOR_EMOJI = [
+    { hex:'#DC2626', emoji:'🟥' }, { hex:'#EA580C', emoji:'🟧' },
+    { hex:'#F59E0B', emoji:'🟨' }, { hex:'#EAB308', emoji:'🟨' },
+    { hex:'#16A34A', emoji:'🟩' }, { hex:'#22C55E', emoji:'🟩' },
+    { hex:'#2F6FED', emoji:'🟦' }, { hex:'#2563EB', emoji:'🟦' },
+    { hex:'#7C3AED', emoji:'🟪' }, { hex:'#9333EA', emoji:'🟪' },
+    { hex:'#98A2B3', emoji:'⬜' }, { hex:'#667085', emoji:'⬛' },
+    { hex:'#000000', emoji:'⬛' }, { hex:'#FFFFFF', emoji:'⬜' }
+  ];
+  function hexToRgb(hex){
+    const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex || '');
+    return m ? { r:parseInt(m[1],16), g:parseInt(m[2],16), b:parseInt(m[3],16) } : { r:150,g:150,b:150 };
+  }
+  function colorToEmoji(hex){
+    const rgb = hexToRgb(hex);
+    let best = COLOR_EMOJI[0], bestDist = Infinity;
+    COLOR_EMOJI.forEach(c=>{
+      const crgb = hexToRgb(c.hex);
+      const dist = Math.pow(rgb.r-crgb.r,2) + Math.pow(rgb.g-crgb.g,2) + Math.pow(rgb.b-crgb.b,2);
+      if(dist < bestDist){ bestDist = dist; best = c; }
+    });
+    return best.emoji;
+  }
+
+  // Pulls this member's tasks for a given week (Sun–Sat) straight out of the
+  // in-memory scheduleData (the same object that's loaded from / saved to your
+  // JSON file), one entry per day.
+  function getMemberWeekEntries(memberId, weekStart){
+    const days = [];
+    for(let i=0;i<7;i++){
+      const d = addDays(weekStart, i);
+      const key = dateKey(d);
+      const entry = scheduleData[memberId + '|' + key];
+      const tasks = (entry && Array.isArray(entry.tasks)) ? entry.tasks : [];
+      days.push({ date: d, tasks });
+    }
+    return days;
+  }
+
+  // Builds a "Completed: 10 / In Progress: 3 / Not Started: 2 ..." count
+  // summary (using whatever taskStatuses are currently configured) for this
+  // member's tasks for the week.
+  function buildTasksByStatusText(memberId, weekStart){
+    const days = getMemberWeekEntries(memberId, weekStart);
+    const counts = {};
+    taskStatuses.forEach(st => counts[st.id] = 0);
+    days.forEach(day => {
+      day.tasks.forEach(tsk => {
+        if(tsk.status && counts.hasOwnProperty(tsk.status)) counts[tsk.status]++;
+      });
+    });
+    return taskStatuses.map(st => `${colorToEmoji(st.color)} ${st.label}: ${counts[st.id]}`).join('\n');
+  }
+
+  // Builds a day-by-day list (Sun through Sat) of every task this member has
+  // for the week, tagged with its status (colored per the status's configured
+  // color) plus Delayed (🔴) or On Time (🟢).
+  function buildWeekTaskListText(memberId, weekStart){
+    const days = getMemberWeekEntries(memberId, weekStart);
+    return days.map(day => {
+      const dayLabel = WEEKDAY_SHORT[day.date.getDay()] + ' ' + formatShort(day.date);
+      if(!day.tasks.length) return `${dayLabel}: (no tasks)`;
+      const taskLines = day.tasks.map(tsk => {
+        const stInfo = findTag(taskStatuses, tsk.status);
+        const statusEmoji = stInfo ? colorToEmoji(stInfo.color) : '⬜';
+        const taskDate = tsk.date || dateKey(day.date);
+        const valInfo = getTaskValidation(taskDate, tsk.status);
+        const delayEmoji = valInfo.isDelayed ? '🔴' : '🟢';
+        return `   - ${tsk.text || '(No description)'} ${statusEmoji} [${stInfo ? stInfo.label : 'No status'}] ${delayEmoji} [${valInfo.label}]`;
+      }).join('\n');
+      return `${dayLabel}:\n${taskLines}`;
+    }).join('\n');
+  }
+
   function applyEmailTemplate(str, member){
-    return String(str || '').split('{name}').join(member.name || '');
+    let result = String(str || '').split('{name}').join(member.name || '');
+    if(result.indexOf('{week_range}') !== -1 || result.indexOf('{tasks_by_status}') !== -1 || result.indexOf('{week_tasks}') !== -1){
+      const weekStart = startOfWeek(today);
+      const weekEnd = addDays(weekStart, 6);
+      const weekRangeLabel = formatShort(weekStart) + ' – ' + formatShort(weekEnd) + ', ' + weekStart.getFullYear();
+      result = result.split('{week_range}').join(weekRangeLabel);
+      if(result.indexOf('{tasks_by_status}') !== -1){
+        result = result.split('{tasks_by_status}').join(buildTasksByStatusText(member.id, weekStart));
+      }
+      if(result.indexOf('{week_tasks}') !== -1){
+        result = result.split('{week_tasks}').join(buildWeekTaskListText(member.id, weekStart));
+      }
+    }
+    return result;
   }
 
   function computeDelayedTasksByMember(){
