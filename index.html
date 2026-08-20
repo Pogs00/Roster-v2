@@ -1999,7 +1999,7 @@
       </div>
       <div class="manage-section">
         <h4>Default email template</h4>
-        <p class="hint">Used when you click the ✉ icon next to a teammate on the roster. Use <code>{name}</code> for their name. Use <code>{week_range}</code> for the current week's date range, <code>{tasks_by_status}</code> for a count per status (e.g. "🟩 Completed: 10"), and <code>{week_tasks}</code> for a full day-by-day list of this week's tasks — all pulled live from your saved schedule data, no manual typing needed. Email bodies can't carry real font color, so each status and its Delayed/On Time flag is shown with a colored emoji (🟢 on time, 🔴 delayed) instead.</p>
+        <p class="hint">Used when you click the ✉ icon next to a teammate on the roster. Use <code>{name}</code> for their name. Use <code>{week_range}</code> for the current week's date range, <code>{tasks_by_status}</code> for a count per status (e.g. "🟩 Completed: 10"), and <code>{week_tasks}</code> for a full day-by-day list of this week's tasks (each day also shows that day's attendance, e.g. Office/WFH/Leave/Rest Day) — all pulled live from your saved schedule data, no manual typing needed. Email bodies can't carry real font color, so each status, attendance, and the Delayed/On Time flag is shown with a colored emoji (🟢 on time, 🔴 delayed) instead.</p>
         <label for="emailTemplateSubjectInput" style="font-size:12.5px;font-weight:600;display:block;margin-bottom:4px;">Subject</label>
         <input type="text" id="emailTemplateSubjectInput" placeholder="Quick check-in, {name}" style="width:100%;font-family:'Inter',sans-serif;font-size:13px;padding:8px 10px;border-radius:8px;border:1px solid var(--border);background:var(--surface-2);color:var(--ink);margin-bottom:10px;" />
         <label for="emailTemplateBodyInput" style="font-size:12.5px;font-weight:600;display:block;margin-bottom:4px;">Body</label>
@@ -4720,7 +4720,10 @@
       const key = dateKey(d);
       const entry = scheduleData[memberId + '|' + key];
       const tasks = (entry && Array.isArray(entry.tasks)) ? entry.tasks : [];
-      days.push({ date: d, tasks });
+      const dayOfWeek = d.getDay();
+      const isWeekend = (dayOfWeek === 0 || dayOfWeek === 6);
+      const attendanceTagId = entry && entry.tag !== undefined && entry.tag !== '' ? entry.tag : (isWeekend ? 'at_jida8xir' : '');
+      days.push({ date: d, tasks, attendanceTagId });
     }
     return days;
   }
@@ -4742,11 +4745,15 @@
 
   // Builds a day-by-day list (Sun through Sat) of every task this member has
   // for the week, tagged with its status (colored per the status's configured
-  // color) plus Delayed (🔴) or On Time (🟢).
+  // color) plus Delayed (🔴) or On Time (🟢). Each day's date is followed by
+  // that day's attendance status (Office, WFH, Leave, Rest Day, etc.), colored
+  // per its own configured color.
   function buildWeekTaskListText(memberId, weekStart){
     const days = getMemberWeekEntries(memberId, weekStart);
     return days.map(day => {
-      const dayLabel = WEEKDAY_SHORT[day.date.getDay()] + ' ' + formatShort(day.date);
+      const attInfo = day.attendanceTagId ? findTag(attendanceTags, day.attendanceTagId) : null;
+      const attSuffix = attInfo ? ` — ${colorToEmoji(attInfo.color)} [${attInfo.label}]` : '';
+      const dayLabel = WEEKDAY_SHORT[day.date.getDay()] + ' ' + formatShort(day.date) + attSuffix;
       if(!day.tasks.length) return `${dayLabel}: (no tasks)`;
       const taskLines = day.tasks.map(tsk => {
         const stInfo = findTag(taskStatuses, tsk.status);
