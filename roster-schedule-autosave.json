@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-20T07:09:28.996Z",
+  "exportedAt": "2026-08-20T07:10:28.988Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -442,7 +442,7 @@
           "id": "t_auctml5x",
           "date": "2026-08-20",
           "text": "Aoha Training",
-          "status": "not-started"
+          "status": "completed"
         }
       ],
       "comment": ""
