@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-21T07:57:19.590Z",
+  "exportedAt": "2026-08-21T07:58:19.596Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -552,7 +552,7 @@
         {
           "id": "t_824b7h4a",
           "date": "2026-08-25",
-          "text": "Torikizoku KDS presentation and status update @10am",
+          "text": "Torikizoku KDS presentation and status update @1pm",
           "status": "not-started"
         }
       ],
