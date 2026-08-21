@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-21T08:17:19.600Z",
+  "exportedAt": "2026-08-21T08:18:19.821Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -1161,7 +1161,7 @@
         "store": "Tori Sanwa Mitsukoshi",
         "description": "Plugin update monitoring",
         "pointPerson": "Lawrence",
-        "status": "In Progress",
+        "status": "For Internal Discussion",
         "startDate": "2026-08-19",
         "endDate": "2026-08-25",
         "reviseEndDate": "",
