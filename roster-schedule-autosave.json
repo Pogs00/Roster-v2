@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-21T07:56:19.592Z",
+  "exportedAt": "2026-08-21T07:57:19.590Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -465,7 +465,7 @@
       "comment": ""
     },
     "m_jig7aydp|2026-08-24": {
-      "tag": "at_ncveij9q",
+      "tag": "at_tljjo94f",
       "tasks": [
         {
           "id": "t_j0pueqst",
@@ -1192,7 +1192,12 @@
         "startDate": "2026-08-20",
         "endDate": "2026-08-24",
         "reviseEndDate": "",
-        "remarks": []
+        "remarks": [
+          {
+            "date": "8/21/2026, 3:56:33 PM",
+            "text": "Coordinated with S' Harmon but no feedback yet"
+          }
+        ]
       }
     ]
   }
