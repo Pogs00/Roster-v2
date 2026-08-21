@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-21T07:55:19.592Z",
+  "exportedAt": "2026-08-21T07:56:19.592Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -1183,6 +1183,16 @@
             "text": "Encounter restart today 3 times, send an email to Dev team for prio checking"
           }
         ]
+      },
+      {
+        "store": "Tori Sanwa Mitsukoshi",
+        "description": "Regular discount default presentation format for percentage not working",
+        "pointPerson": "Lawrence",
+        "status": "In Progress",
+        "startDate": "2026-08-20",
+        "endDate": "2026-08-24",
+        "reviseEndDate": "",
+        "remarks": []
       }
     ]
   }
