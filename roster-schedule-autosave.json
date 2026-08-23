@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-23T23:51:01.819Z",
+  "exportedAt": "2026-08-23T23:52:02.697Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -596,7 +596,7 @@
         {
           "id": "t_g0w80pft",
           "date": "2026-08-28",
-          "text": "",
+          "text": "AI session @10am",
           "status": "not-started"
         }
       ],
