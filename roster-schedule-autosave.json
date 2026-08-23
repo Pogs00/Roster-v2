@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-23T23:48:04.106Z",
+  "exportedAt": "2026-08-23T23:48:24.753Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -1022,6 +1022,18 @@
     "m_jig7aydp|2026-09-30": {
       "tag": "office",
       "tasks": [],
+      "comment": ""
+    },
+    "m_00tz16bv|2026-08-23": {
+      "tag": "at_jida8xir",
+      "tasks": [
+        {
+          "id": "t_ib3px7ky",
+          "date": "2026-08-23",
+          "text": "S1 Duty",
+          "status": "completed"
+        }
+      ],
       "comment": ""
     }
   },
