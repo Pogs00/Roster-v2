@@ -2017,9 +2017,10 @@
         <h4>Delayed task alerts</h4>
         <p class="hint">When you open the app, any tasks past their due date (and not complete) are flagged. You can draft a reminder email, CC'd to a manager, for each affected teammate.</p>
         <div class="autosave-interval-row">
-          <label for="managerEmailInput" style="font-size:12.5px;font-weight:600;">Manager email for CC</label>
+          <label for="managerEmailInput" style="font-size:12.5px;font-weight:600;">Manager email(s) for CC</label>
         </div>
-        <input type="email" id="managerEmailInput" placeholder="manager@company.com" style="width:100%;font-family:'Inter',sans-serif;font-size:13px;padding:8px 10px;border-radius:8px;border:1px solid var(--border);background:var(--surface-2);color:var(--ink);" />
+        <input type="email" id="managerEmailInput" multiple placeholder="manager@company.com, lead@company.com" style="width:100%;font-family:'Inter',sans-serif;font-size:13px;padding:8px 10px;border-radius:8px;border:1px solid var(--border);background:var(--surface-2);color:var(--ink);" />
+        <p class="hint" style="margin:6px 0 0;">Separate multiple addresses with a comma. Used for CC on the ✉ draft/delayed-task emails, and as the manager CC for the automatic email schedule.</p>
       </div>
       <div class="manage-section">
         <h4>Default email template</h4>
@@ -2446,6 +2447,22 @@
 
   function isValidEmail(str){
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(str);
+  }
+
+  // Validates a comma-separated list of addresses (used for the manager CC
+  // field, which now accepts multiple recipients). Empty entries from stray
+  // commas/whitespace are ignored; returns false if any non-empty entry
+  // doesn't look like an email.
+  function isValidEmailList(str){
+    const parts = String(str || '').split(',').map(s => s.trim()).filter(Boolean);
+    if(!parts.length) return true;
+    return parts.every(isValidEmail);
+  }
+
+  // Normalizes a comma-separated address list: trims each entry, drops empty
+  // ones, and re-joins with ", " for consistent storage/display.
+  function normalizeEmailList(str){
+    return String(str || '').split(',').map(s => s.trim()).filter(Boolean).join(', ');
   }
 
   function startEditingMemberEmail(row, m){
@@ -5520,13 +5537,14 @@
   });
   document.getElementById('managerEmailInput').addEventListener('change', async (e)=>{
     const val = e.target.value.trim();
-    if(val && !isValidEmail(val)){
-      showToast('That doesn\u2019t look like a valid email address', true);
+    if(val && !isValidEmailList(val)){
+      showToast('One or more of those don\u2019t look like valid email addresses', true);
       return;
     }
-    managerEmail = val;
+    managerEmail = normalizeEmailList(val);
+    e.target.value = managerEmail;
     await idbSet('manager-email', managerEmail);
-    showToast(val ? 'Manager email saved' : 'Manager email cleared');
+    showToast(managerEmail ? 'Manager email(s) saved' : 'Manager email cleared');
   });
 
   document.getElementById('emailTemplateSubjectInput').addEventListener('change', async (e)=>{
