@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-24T06:10:35.346Z",
+  "exportedAt": "2026-08-24T06:11:35.090Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -514,6 +514,12 @@
           "id": "t_e4ybt7vp",
           "date": "2026-08-24",
           "text": "Tori Sanwa plugin update with S' Harmon",
+          "status": "not-started"
+        },
+        {
+          "id": "t_huqd1r40",
+          "date": "2026-08-24",
+          "text": "Torikizoku run through before Aug 25 presentation",
           "status": "not-started"
         }
       ],
