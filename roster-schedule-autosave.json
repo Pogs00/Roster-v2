@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-24T00:15:00.024Z",
+  "exportedAt": "2026-08-24T00:16:00.883Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -455,6 +455,12 @@
           "date": "2026-08-24",
           "text": "Retail Meeting @9am",
           "status": "not-started"
+        },
+        {
+          "id": "t_dfudj9fn",
+          "date": "2026-08-24",
+          "text": "Ticket assignment",
+          "status": "not-started"
         }
       ],
       "comment": ""
@@ -503,6 +509,12 @@
           "date": "2026-08-27",
           "text": "menuX® Training",
           "status": "not-started"
+        },
+        {
+          "id": "t_fxnsojvj",
+          "date": "2026-08-27",
+          "text": "Ticket assignment",
+          "status": "not-started"
         }
       ],
       "comment": ""
@@ -537,7 +549,7 @@
         {
           "id": "t_j22iilt5",
           "date": "2026-08-25",
-          "text": "",
+          "text": "Ticket assignment",
           "status": "not-started"
         }
       ],
@@ -575,7 +587,14 @@
     },
     "m_lnyo2eed|2026-08-26": {
       "tag": "office",
-      "tasks": [],
+      "tasks": [
+        {
+          "id": "t_8z3n4jso",
+          "date": "2026-08-26",
+          "text": "Ticket assignment",
+          "status": "not-started"
+        }
+      ],
       "comment": ""
     },
     "m_00tz16bv|2026-08-26": {
@@ -597,7 +616,14 @@
     },
     "m_lnyo2eed|2026-08-28": {
       "tag": "at_gfigh1b7",
-      "tasks": [],
+      "tasks": [
+        {
+          "id": "t_42a1t3zo",
+          "date": "2026-08-28",
+          "text": "Ticket assignment",
+          "status": "not-started"
+        }
+      ],
       "comment": ""
     },
     "m_00tz16bv|2026-08-28": {
