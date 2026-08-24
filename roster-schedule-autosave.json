@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-24T02:52:06.907Z",
+  "exportedAt": "2026-08-24T02:53:06.905Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -538,6 +538,30 @@
           "id": "t_a87d34cb",
           "date": "2026-08-27",
           "text": "menuX® Training",
+          "status": "not-started"
+        },
+        {
+          "id": "t_tal545cy",
+          "date": "2026-08-27",
+          "text": "MenuX v2 testing",
+          "status": "not-started"
+        },
+        {
+          "id": "t_grtoe336",
+          "date": "2026-08-27",
+          "text": "Aloha Report Utility",
+          "status": "not-started"
+        },
+        {
+          "id": "t_m6ga3g8c",
+          "date": "2026-08-27",
+          "text": "Aloha v12 plugins",
+          "status": "not-started"
+        },
+        {
+          "id": "t_3g8s97na",
+          "date": "2026-08-27",
+          "text": "Training new employee",
           "status": "not-started"
         }
       ],
