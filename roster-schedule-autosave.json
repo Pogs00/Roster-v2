@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-24T02:54:06.898Z",
+  "exportedAt": "2026-08-24T02:55:06.899Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -454,7 +454,7 @@
           "id": "t_23ya3v90",
           "date": "2026-08-24",
           "text": "Retail Meeting @9am",
-          "status": "not-started"
+          "status": "completed"
         },
         {
           "id": "t_dfudj9fn",
@@ -496,7 +496,7 @@
           "id": "t_5dx66t3t",
           "date": "2026-08-24",
           "text": "Retail Meeting @9am",
-          "status": "not-started"
+          "status": "completed"
         },
         {
           "id": "t_b37uxbe9",
