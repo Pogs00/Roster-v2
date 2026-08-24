@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-24T06:11:35.090Z",
+  "exportedAt": "2026-08-24T06:12:35.340Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -430,13 +430,13 @@
           "id": "t_3tkwviup",
           "date": "2026-08-20",
           "text": "Plugins v12 Testing",
-          "status": "not-started"
+          "status": "ts_6jxo1r4g"
         },
         {
           "id": "t_2ge5983a",
           "date": "2026-08-20",
           "text": "MenuX V2 ",
-          "status": "not-started"
+          "status": "ts_6jxo1r4g"
         },
         {
           "id": "t_auctml5x",
@@ -460,7 +460,7 @@
           "id": "t_dfudj9fn",
           "date": "2026-08-24",
           "text": "Ticket assignment",
-          "status": "not-started"
+          "status": "completed"
         },
         {
           "id": "t_hxfl7yio",
@@ -478,13 +478,13 @@
           "id": "t_f7jmjbuj",
           "date": "2026-08-24",
           "text": "MenuX v2 testing",
-          "status": "not-started"
+          "status": "ts_6jxo1r4g"
         },
         {
           "id": "t_6vcm53pp",
           "date": "2026-08-24",
           "text": "Aloha Report Utility",
-          "status": "not-started"
+          "status": "ts_6jxo1r4g"
         },
         {
           "id": "t_kmxkriww",
@@ -514,7 +514,7 @@
           "id": "t_e4ybt7vp",
           "date": "2026-08-24",
           "text": "Tori Sanwa plugin update with S' Harmon",
-          "status": "not-started"
+          "status": "in-progress"
         },
         {
           "id": "t_huqd1r40",
