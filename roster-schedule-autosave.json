@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-24T06:01:18.361Z",
+  "exportedAt": "2026-08-24T06:06:35.093Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -1166,7 +1166,7 @@
         "store": "Wendy's HO",
         "description": "CMS Training",
         "pointPerson": "Lawrence",
-        "status": "In Progress",
+        "status": "Completed",
         "startDate": "2026-08-17",
         "endDate": "2026-08-17",
         "reviseEndDate": "2026-08-24",
