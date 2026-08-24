@@ -8,6 +8,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <!-- jsPDF library for PDF export functionality -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<!-- EmailJS: sends real email straight from the browser (no server) for the Automatic email schedule feature -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
   :root{
     --bg:#EEF1F5;
@@ -1560,6 +1562,12 @@
     <button class="banner-dismiss" id="delayedDismissBtn" type="button" aria-label="Dismiss">✕</button>
   </div>
 
+  <div class="conflict-banner" id="autoEmailMailtoBanner">
+    <span id="autoEmailMailtoBannerText">✉ Scheduled emails are ready to send.</span>
+    <button class="btn" id="autoEmailMailtoComposeBtn" type="button">Compose emails</button>
+    <button class="banner-dismiss" id="autoEmailMailtoDismissBtn" type="button" aria-label="Dismiss">✕</button>
+  </div>
+
   <div class="conflict-banner" id="githubConflictBanner">
     <span>⚠ This file changed on GitHub since your last save here. Load the latest version before saving again, or you'll overwrite those changes.</span>
     <button class="btn" id="githubConflictReloadBtn" type="button">Load latest</button>
@@ -1582,6 +1590,22 @@
         <button class="close-x" id="closeDelayedBtn" aria-label="Close">✕</button>
       </div>
       <div class="modal-body" id="delayedModalBody"></div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="autoEmailMailtoBackdrop">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="autoEmailMailtoTitle">
+      <div class="modal-head">
+        <div>
+          <h3 id="autoEmailMailtoTitle">Compose Scheduled Emails</h3>
+          <div class="sub" id="autoEmailMailtoSub">Opens your mail app pre-filled with the same formatted details as the ✉ draft — you still click Send there.</div>
+        </div>
+        <button class="close-x" id="closeAutoEmailMailtoBtn" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body" id="autoEmailMailtoModalBody"></div>
+      <div style="display:flex;justify-content:flex-end;gap:8px;padding:12px 20px 18px;">
+        <button class="btn secondary" id="autoEmailMailtoMarkSentBtn" type="button">Mark this batch as sent</button>
+      </div>
     </div>
   </div>
 
@@ -2004,6 +2028,82 @@
         <input type="text" id="emailTemplateSubjectInput" placeholder="Quick check-in, {name}" style="width:100%;font-family:'Inter',sans-serif;font-size:13px;padding:8px 10px;border-radius:8px;border:1px solid var(--border);background:var(--surface-2);color:var(--ink);margin-bottom:10px;" />
         <label for="emailTemplateBodyInput" style="font-size:12.5px;font-weight:600;display:block;margin-bottom:4px;">Body</label>
         <textarea id="emailTemplateBodyInput" rows="9" placeholder="Hi {name}," style="width:100%;font-family:'Inter',sans-serif;font-size:13px;padding:8px 10px;border-radius:8px;border:1px solid var(--border);background:var(--surface-2);color:var(--ink);resize:vertical;"></textarea>
+      </div>
+      <div class="manage-section">
+        <h4>Automatic email schedule</h4>
+        <p class="hint">Sends the "Default email template" above on the day/time you set below. This runs on a timer <strong>while this tab is open in your browser</strong> — it can't fire while the app is closed. Choose how delivery works below — you can switch modes any time, including per scheduled run.</p>
+
+        <div style="display:flex;gap:18px;margin-bottom:10px;flex-wrap:wrap;">
+          <label style="display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;cursor:pointer;">
+            <input type="radio" name="autoEmailDeliveryMode" id="autoEmailModeEmailjs" value="emailjs" style="margin:0;" />
+            Auto-send via EmailJS (no click needed)
+          </label>
+          <label style="display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;cursor:pointer;">
+            <input type="radio" name="autoEmailDeliveryMode" id="autoEmailModeMailto" value="mailto" style="margin:0;" />
+            Open in mail app (mailto, full formatting)
+          </label>
+        </div>
+
+        <p class="hint" id="mailtoModeHint" style="display:none;margin:0 0 12px;">Uses the same <code>mailto:</code> approach as the ✉ draft button — so the email keeps its full formatting (bolded dates, colored status/delay emoji, day-by-day task list). Because a browser can't send mail on its own, at the scheduled time a banner appears letting you open a pre-filled email per recipient; you still click Send in your own mail app.</p>
+
+        <div id="emailjsFieldsWrap">
+          <p class="hint" style="margin:0 0 10px;">EmailJS delivery uses <a href="https://www.emailjs.com" target="_blank" rel="noopener">EmailJS</a> (free tier), which sends real email directly from the browser with no server of its own.</p>
+          <label for="emailjsServiceIdInput" style="font-size:12.5px;font-weight:600;display:block;margin-bottom:4px;">EmailJS Service ID</label>
+          <input type="text" id="emailjsServiceIdInput" placeholder="service_xxxxxxx" style="width:100%;font-family:'Inter',sans-serif;font-size:13px;padding:8px 10px;border-radius:8px;border:1px solid var(--border);background:var(--surface-2);color:var(--ink);margin-bottom:8px;" />
+
+          <label for="emailjsTemplateIdInput" style="font-size:12.5px;font-weight:600;display:block;margin-bottom:4px;">EmailJS Template ID</label>
+          <input type="text" id="emailjsTemplateIdInput" placeholder="template_xxxxxxx" style="width:100%;font-family:'Inter',sans-serif;font-size:13px;padding:8px 10px;border-radius:8px;border:1px solid var(--border);background:var(--surface-2);color:var(--ink);margin-bottom:8px;" />
+
+          <label for="emailjsPublicKeyInput" style="font-size:12.5px;font-weight:600;display:block;margin-bottom:4px;">EmailJS Public Key</label>
+          <input type="password" id="emailjsPublicKeyInput" placeholder="Public key" style="width:100%;font-family:'Inter',sans-serif;font-size:13px;padding:8px 10px;border-radius:8px;border:1px solid var(--border);background:var(--surface-2);color:var(--ink);margin-bottom:6px;" />
+          <p class="hint" style="margin:0 0 12px;">In your EmailJS account: add an Email Service, then create a Template whose "To email" field is <code>{{to_email}}</code> and whose Subject is <code>{{subject}}</code>, with a body that just prints <code>{{message}}</code> (also add <code>{{cc_email}}</code> and <code>{{to_name}}</code> if you want CC / a name variable). Copy the Public Key from Account → API Keys. Everything here is stored only in this browser, never uploaded anywhere.</p>
+        </div>
+
+        <div class="autosave-interval-row" style="flex-wrap:wrap;row-gap:8px;">
+          <label for="autoEmailFrequencySelect" style="font-size:12.5px;font-weight:600;">Frequency</label>
+          <select id="autoEmailFrequencySelect" style="font-family:'Inter',sans-serif;font-size:13px;padding:6px 8px;border-radius:8px;border:1px solid var(--border);background:var(--surface-2);color:var(--ink);">
+            <option value="daily">Every day</option>
+            <option value="weekly">Every week</option>
+            <option value="monthly">Every month</option>
+          </select>
+          <select id="autoEmailWeekdaySelect" style="font-family:'Inter',sans-serif;font-size:13px;padding:6px 8px;border-radius:8px;border:1px solid var(--border);background:var(--surface-2);color:var(--ink);display:none;">
+            <option value="0">Sunday</option>
+            <option value="1">Monday</option>
+            <option value="2">Tuesday</option>
+            <option value="3">Wednesday</option>
+            <option value="4">Thursday</option>
+            <option value="5">Friday</option>
+            <option value="6">Saturday</option>
+          </select>
+          <input type="number" id="autoEmailMonthDayInput" min="1" max="28" value="1" style="display:none;width:64px;font-family:'Inter',sans-serif;font-size:13px;padding:6px 8px;border-radius:8px;border:1px solid var(--border);background:var(--surface-2);color:var(--ink);" title="Day of month" />
+          <label for="autoEmailTimeInput" style="font-size:12.5px;font-weight:600;margin-left:4px;">at</label>
+          <input type="time" id="autoEmailTimeInput" value="09:00" style="font-family:'Inter',sans-serif;font-size:13px;padding:6px 8px;border-radius:8px;border:1px solid var(--border);background:var(--surface-2);color:var(--ink);" />
+        </div>
+        <p class="hint" id="autoEmailMonthDayHint" style="display:none;margin:6px 0 0;">If a month is shorter than this day (e.g. 31 in February), it sends on that month's last day instead.</p>
+
+        <label class="switch-row" for="autoEmailIncludeManagerToggle" style="margin-top:12px;">
+          <span class="switch">
+            <input type="checkbox" id="autoEmailIncludeManagerToggle" />
+            <span class="switch-track"><span class="switch-thumb"></span></span>
+          </span>
+          <span style="font-size:13px;font-weight:600;">CC the manager email set above</span>
+        </label>
+
+        <div style="font-size:12.5px;font-weight:600;margin-top:14px;margin-bottom:6px;">Send to</div>
+        <div id="autoEmailRecipientList" style="display:flex;flex-direction:column;gap:6px;max-height:160px;overflow:auto;padding:2px;"></div>
+
+        <label class="switch-row" for="autoEmailEnabledToggle" style="margin-top:14px;">
+          <span class="switch">
+            <input type="checkbox" id="autoEmailEnabledToggle" />
+            <span class="switch-track"><span class="switch-thumb"></span></span>
+          </span>
+          <span id="autoEmailEnabledLabel" style="font-size:13px;font-weight:600;">Enable automatic sending</span>
+        </label>
+
+        <div class="autosave-status-row" style="margin-top:10px;">
+          <span id="autoEmailStatusText">Not configured yet.</span>
+          <button class="btn" id="autoEmailSendNowBtn">Send now</button>
+        </div>
       </div>
     </div>
   </div>
@@ -2472,6 +2572,8 @@
 
   /* ---------------- manage attendance / task statuses ---------------- */
   function renderManageLists(){
+    renderAutoEmailRecipientList();
+    updateAutoEmailStatusText();
     attendanceManageList.innerHTML = '';
     if(!attendanceTags.length){
       attendanceManageList.innerHTML = '<div class="empty-hint">No attendance statuses yet. Add one below.</div>';
@@ -4671,6 +4773,309 @@
   let emailTemplateSubject = DEFAULT_EMAIL_TEMPLATE_SUBJECT;
   let emailTemplateBody = DEFAULT_EMAIL_TEMPLATE_BODY;
 
+  /* ---------------- automatic email schedule (client-side, tab must be open) ---------------- */
+  let emailjsServiceId = '';
+  let emailjsTemplateId = '';
+  let emailjsPublicKey = '';
+  let emailjsInitedWithKey = '';
+  let autoEmailDeliveryMode = 'emailjs'; // 'emailjs' | 'mailto'
+  let autoEmailEnabled = false;
+  let autoEmailFrequency = 'daily';    // 'daily' | 'weekly' | 'monthly'
+  let autoEmailWeekday = 1;            // 0=Sun .. 6=Sat, used when weekly
+  let autoEmailMonthDay = 1;           // 1-28, used when monthly
+  let autoEmailTime = '09:00';         // 'HH:MM'
+  let autoEmailIncludeManagerCc = false;
+  let autoEmailSelectedMemberIds = null; // null = "everyone with an email"; else array of member ids
+  let autoEmailLastSentPeriodKey = '';   // guards against sending twice in the same day/week/month
+  let autoEmailLastSentAt = '';          // display string
+  let autoEmailScheduleTimer = null;
+
+  async function loadAutoEmailSettings(){
+    const [svc, tpl, key, mode, enabled, freq, wkday, mday, time, cc, selected, lastKey, lastAt] = await Promise.all([
+      idbGet('autoemail-service-id'), idbGet('autoemail-template-id'), idbGet('autoemail-public-key'),
+      idbGet('autoemail-delivery-mode'),
+      idbGet('autoemail-enabled'), idbGet('autoemail-frequency'), idbGet('autoemail-weekday'),
+      idbGet('autoemail-monthday'), idbGet('autoemail-time'), idbGet('autoemail-include-manager-cc'),
+      idbGet('autoemail-selected-members'), idbGet('autoemail-last-sent-period'), idbGet('autoemail-last-sent-at')
+    ]);
+    emailjsServiceId = typeof svc === 'string' ? svc : '';
+    emailjsTemplateId = typeof tpl === 'string' ? tpl : '';
+    emailjsPublicKey = typeof key === 'string' ? key : '';
+    autoEmailDeliveryMode = mode === 'mailto' ? 'mailto' : 'emailjs';
+    autoEmailEnabled = !!enabled;
+    autoEmailFrequency = ['daily','weekly','monthly'].includes(freq) ? freq : 'daily';
+    autoEmailWeekday = Number.isFinite(wkday) ? wkday : 1;
+    autoEmailMonthDay = Number.isFinite(mday) && mday >= 1 && mday <= 28 ? mday : 1;
+    autoEmailTime = typeof time === 'string' && /^\d{2}:\d{2}$/.test(time) ? time : '09:00';
+    autoEmailIncludeManagerCc = !!cc;
+    autoEmailSelectedMemberIds = Array.isArray(selected) ? selected : null;
+    autoEmailLastSentPeriodKey = typeof lastKey === 'string' ? lastKey : '';
+    autoEmailLastSentAt = typeof lastAt === 'string' ? lastAt : '';
+
+    document.getElementById('emailjsServiceIdInput').value = emailjsServiceId;
+    document.getElementById('emailjsTemplateIdInput').value = emailjsTemplateId;
+    document.getElementById('emailjsPublicKeyInput').value = emailjsPublicKey;
+    document.getElementById('autoEmailModeEmailjs').checked = (autoEmailDeliveryMode === 'emailjs');
+    document.getElementById('autoEmailModeMailto').checked = (autoEmailDeliveryMode === 'mailto');
+    document.getElementById('autoEmailFrequencySelect').value = autoEmailFrequency;
+    document.getElementById('autoEmailWeekdaySelect').value = String(autoEmailWeekday);
+    document.getElementById('autoEmailMonthDayInput').value = autoEmailMonthDay;
+    document.getElementById('autoEmailTimeInput').value = autoEmailTime;
+    document.getElementById('autoEmailIncludeManagerToggle').checked = autoEmailIncludeManagerCc;
+    document.getElementById('autoEmailEnabledToggle').checked = autoEmailEnabled;
+    updateAutoEmailFrequencyFieldsVisibility();
+    updateAutoEmailDeliveryModeUI();
+    updateAutoEmailStatusText();
+  }
+
+  function updateAutoEmailDeliveryModeUI(){
+    const isMailto = (autoEmailDeliveryMode === 'mailto');
+    const fieldsWrap = document.getElementById('emailjsFieldsWrap');
+    const hint = document.getElementById('mailtoModeHint');
+    if(fieldsWrap) fieldsWrap.style.display = isMailto ? 'none' : '';
+    if(hint) hint.style.display = isMailto ? '' : 'none';
+  }
+
+  function updateAutoEmailFrequencyFieldsVisibility(){
+    const freq = document.getElementById('autoEmailFrequencySelect').value;
+    document.getElementById('autoEmailWeekdaySelect').style.display = (freq === 'weekly') ? '' : 'none';
+    document.getElementById('autoEmailMonthDayInput').style.display = (freq === 'monthly') ? '' : 'none';
+    document.getElementById('autoEmailMonthDayHint').style.display = (freq === 'monthly') ? '' : 'none';
+  }
+
+  function getAutoEmailRecipients(){
+    return members.filter(m => {
+      if(!m.email) return false;
+      if(autoEmailSelectedMemberIds === null) return true;
+      return autoEmailSelectedMemberIds.includes(m.id);
+    });
+  }
+
+  function renderAutoEmailRecipientList(){
+    const list = document.getElementById('autoEmailRecipientList');
+    if(!list) return;
+    list.innerHTML = '';
+    if(!members.length){
+      list.innerHTML = '<div class="empty-hint">Add teammates to the roster first.</div>';
+      return;
+    }
+    members.forEach(m=>{
+      const checked = autoEmailSelectedMemberIds === null ? !!m.email : autoEmailSelectedMemberIds.includes(m.id);
+      const row = document.createElement('label');
+      row.style.cssText = 'display:flex;align-items:center;gap:8px;font-size:12.5px;padding:2px 0;';
+      row.innerHTML = `
+        <input type="checkbox" data-member-id="${m.id}" ${checked ? 'checked' : ''} ${m.email ? '' : 'disabled'} style="margin:0;" />
+        <span style="${m.email ? '' : 'color:var(--muted-2);font-style:italic;'}">${escapeHtml(m.name)}${m.email ? '' : ' (no email on file)'}</span>
+      `;
+      row.querySelector('input').addEventListener('change', async (e)=>{
+        // First interaction switches from the implicit "everyone with email" mode
+        // into an explicit selection, seeded with whoever's currently checked.
+        if(autoEmailSelectedMemberIds === null){
+          autoEmailSelectedMemberIds = members.filter(mm=>mm.email).map(mm=>mm.id);
+        }
+        const id = e.target.getAttribute('data-member-id');
+        if(e.target.checked){
+          if(!autoEmailSelectedMemberIds.includes(id)) autoEmailSelectedMemberIds.push(id);
+        } else {
+          autoEmailSelectedMemberIds = autoEmailSelectedMemberIds.filter(x=>x!==id);
+        }
+        await idbSet('autoemail-selected-members', autoEmailSelectedMemberIds);
+        updateAutoEmailStatusText();
+      });
+      list.appendChild(row);
+    });
+  }
+
+  function getAutoEmailScheduleInfo(now){
+    const [hh, mm] = (autoEmailTime || '09:00').split(':').map(Number);
+    if(autoEmailFrequency === 'weekly'){
+      const wkStart = startOfWeek(now);
+      const periodKey = 'W' + dateKey(wkStart);
+      const isScheduledDay = now.getDay() === autoEmailWeekday;
+      const fireAt = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hh||0, mm||0, 0);
+      return { periodKey, isScheduledDay, fireAt };
+    }
+    if(autoEmailFrequency === 'monthly'){
+      const periodKey = now.getFullYear() + '-' + pad(now.getMonth()+1);
+      const daysInMonth = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate();
+      const targetDay = Math.min(autoEmailMonthDay || 1, daysInMonth);
+      const isScheduledDay = now.getDate() === targetDay;
+      const fireAt = new Date(now.getFullYear(), now.getMonth(), targetDay, hh||0, mm||0, 0);
+      return { periodKey, isScheduledDay, fireAt };
+    }
+    // daily
+    const periodKey = dateKey(now);
+    const fireAt = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hh||0, mm||0, 0);
+    return { periodKey, isScheduledDay: true, fireAt };
+  }
+
+  function nextAutoEmailFireLabel(){
+    if(!autoEmailEnabled) return 'Automatic sending is off.';
+    if(autoEmailDeliveryMode === 'emailjs' && (!emailjsServiceId || !emailjsTemplateId || !emailjsPublicKey)) return 'Add your EmailJS Service ID, Template ID and Public Key above to enable sending.';
+    const now = new Date();
+    const info = getAutoEmailScheduleInfo(now);
+    let label;
+    if(autoEmailFrequency === 'daily') label = `Sends daily at ${autoEmailTime}`;
+    else if(autoEmailFrequency === 'weekly') label = `Sends every ${['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][autoEmailWeekday]} at ${autoEmailTime}`;
+    else label = `Sends on day ${autoEmailMonthDay} of each month at ${autoEmailTime}`;
+    if(autoEmailDeliveryMode === 'mailto') label += ' (opens your mail app to send — a click needed)';
+    if(info.periodKey === autoEmailLastSentPeriodKey) label += ' — already sent for this period.';
+    return label;
+  }
+
+  function updateAutoEmailStatusText(){
+    const el = document.getElementById('autoEmailStatusText');
+    if(!el) return;
+    const recipients = getAutoEmailRecipients();
+    let text = nextAutoEmailFireLabel();
+    text += ` · ${recipients.length} recipient${recipients.length===1?'':'s'}`;
+    if(autoEmailLastSentAt) text += ` · Last sent ${autoEmailLastSentAt}`;
+    el.textContent = text;
+  }
+
+  function ensureEmailjsInited(){
+    if(typeof emailjs === 'undefined') return false;
+    if(!emailjsPublicKey) return false;
+    if(emailjsInitedWithKey !== emailjsPublicKey){
+      try{
+        emailjs.init({ publicKey: emailjsPublicKey });
+        emailjsInitedWithKey = emailjsPublicKey;
+      }catch(e){ console.error('EmailJS init failed', e); return false; }
+    }
+    return true;
+  }
+
+  async function sendAutoEmails(markPeriodSent){
+    if(!emailjsServiceId || !emailjsTemplateId || !emailjsPublicKey){
+      showToast('Add your EmailJS Service ID, Template ID and Public Key first', true);
+      return;
+    }
+    if(!ensureEmailjsInited()){
+      showToast('EmailJS could not be initialized — check your Public Key', true);
+      return;
+    }
+    const recipients = getAutoEmailRecipients();
+    if(!recipients.length){
+      showToast('No recipients with an email on file are selected', true);
+      return;
+    }
+    let sent = 0, failed = 0;
+    for(const m of recipients){
+      const subject = applyEmailTemplate(emailTemplateSubject, m);
+      const body = applyEmailTemplate(emailTemplateBody, m);
+      const params = {
+        to_email: m.email,
+        to_name: m.name,
+        cc_email: autoEmailIncludeManagerCc ? managerEmail : '',
+        subject: subject,
+        message: body
+      };
+      try{
+        await emailjs.send(emailjsServiceId, emailjsTemplateId, params);
+        sent++;
+      }catch(e){
+        console.error('EmailJS send failed for', m.email, e);
+        failed++;
+      }
+    }
+    autoEmailLastSentAt = new Date().toLocaleString();
+    await idbSet('autoemail-last-sent-at', autoEmailLastSentAt);
+    if(markPeriodSent){
+      const info = getAutoEmailScheduleInfo(new Date());
+      autoEmailLastSentPeriodKey = info.periodKey;
+      await idbSet('autoemail-last-sent-period', autoEmailLastSentPeriodKey);
+    }
+    updateAutoEmailStatusText();
+    if(failed === 0){
+      showToast(`Sent ${sent} email${sent===1?'':'s'}`);
+    } else {
+      showToast(`Sent ${sent}, failed ${failed} — check console for details`, true);
+    }
+  }
+
+  function checkAutoEmailSchedule(){
+    if(!autoEmailEnabled) return;
+    if(autoEmailDeliveryMode === 'emailjs' && (!emailjsServiceId || !emailjsTemplateId || !emailjsPublicKey)) return;
+    const now = new Date();
+    const info = getAutoEmailScheduleInfo(now);
+    if(!info.isScheduledDay) return;
+    if(now < info.fireAt) return;
+    if(autoEmailLastSentPeriodKey === info.periodKey) return; // already sent this period
+    if(autoEmailDeliveryMode === 'mailto'){
+      showAutoEmailMailtoReady(info.periodKey);
+    } else {
+      sendAutoEmails(true);
+    }
+  }
+
+  /* ---- mailto delivery path: browsers can't send mail unattended, so at the
+     scheduled time we surface a banner + modal (same formatted body as the
+     ✉ draft / EmailJS message) and let the user open + send each one. ---- */
+  let autoEmailMailtoPendingPeriodKey = '';
+
+  function showAutoEmailMailtoReady(periodKey){
+    autoEmailMailtoPendingPeriodKey = periodKey;
+    const recipients = getAutoEmailRecipients();
+    const banner = document.getElementById('autoEmailMailtoBanner');
+    const text = document.getElementById('autoEmailMailtoBannerText');
+    if(text) text.textContent = `✉ ${recipients.length} scheduled email${recipients.length===1?'':'s'} ready to send.`;
+    if(banner) banner.classList.add('show');
+  }
+
+  function openAutoEmailMailtoModal(){
+    const recipients = getAutoEmailRecipients();
+    const body = document.getElementById('autoEmailMailtoModalBody');
+    const sub = document.getElementById('autoEmailMailtoSub');
+    body.innerHTML = '';
+    if(!recipients.length){
+      sub.textContent = 'No recipients with an email on file are selected.';
+      document.getElementById('autoEmailMailtoBackdrop').classList.add('open');
+      return;
+    }
+    sub.textContent = `Opens your mail app pre-filled with the same formatted details as the ✉ draft — you still click Send there. ${recipients.length} recipient${recipients.length===1?'':'s'}.`;
+    recipients.forEach(m=>{
+      const subject = applyEmailTemplate(emailTemplateSubject, m);
+      const emailBody = applyEmailTemplate(emailTemplateBody, m);
+      const row = document.createElement('div');
+      row.className = 'delayed-member-group';
+      row.innerHTML = `
+        <div class="delayed-member-head">
+          <strong>${escapeHtml(m.name)} — ${escapeHtml(m.email)}</strong>
+          <button class="btn auto-email-mailto-open-btn" type="button">Open in Mail</button>
+        </div>
+      `;
+      row.querySelector('.auto-email-mailto-open-btn').addEventListener('click', (e)=>{
+        window.location.href = buildMailtoLink({
+          to: m.email || '',
+          cc: autoEmailIncludeManagerCc ? managerEmail : '',
+          subject, body: emailBody
+        });
+        e.target.textContent = 'Opened ✓';
+        e.target.disabled = true;
+      });
+      body.appendChild(row);
+    });
+    document.getElementById('autoEmailMailtoBackdrop').classList.add('open');
+  }
+
+  function markAutoEmailMailtoBatchSent(){
+    const periodKey = autoEmailMailtoPendingPeriodKey || getAutoEmailScheduleInfo(new Date()).periodKey;
+    autoEmailLastSentPeriodKey = periodKey;
+    idbSet('autoemail-last-sent-period', autoEmailLastSentPeriodKey);
+    autoEmailLastSentAt = new Date().toLocaleString();
+    idbSet('autoemail-last-sent-at', autoEmailLastSentAt);
+    updateAutoEmailStatusText();
+    document.getElementById('autoEmailMailtoBanner').classList.remove('show');
+    document.getElementById('autoEmailMailtoBackdrop').classList.remove('open');
+    showToast('Marked this batch as sent');
+  }
+
+  function startAutoEmailScheduler(){
+    if(autoEmailScheduleTimer) clearInterval(autoEmailScheduleTimer);
+    checkAutoEmailSchedule();
+    autoEmailScheduleTimer = setInterval(checkAutoEmailSchedule, 30000);
+  }
+
   async function loadEmailTemplate(){
     const [savedSubject, savedBody] = await Promise.all([
       idbGet('email-template-subject'), idbGet('email-template-body')
@@ -5135,6 +5540,103 @@
     showToast('Email body template saved');
   });
 
+  document.getElementById('emailjsServiceIdInput').addEventListener('change', async (e)=>{
+    emailjsServiceId = e.target.value.trim();
+    await idbSet('autoemail-service-id', emailjsServiceId);
+    updateAutoEmailStatusText();
+    showToast('EmailJS Service ID saved');
+  });
+  document.getElementById('emailjsTemplateIdInput').addEventListener('change', async (e)=>{
+    emailjsTemplateId = e.target.value.trim();
+    await idbSet('autoemail-template-id', emailjsTemplateId);
+    updateAutoEmailStatusText();
+    showToast('EmailJS Template ID saved');
+  });
+  document.getElementById('emailjsPublicKeyInput').addEventListener('change', async (e)=>{
+    emailjsPublicKey = e.target.value.trim();
+    await idbSet('autoemail-public-key', emailjsPublicKey);
+    updateAutoEmailStatusText();
+    showToast('EmailJS Public Key saved');
+  });
+  document.getElementById('autoEmailFrequencySelect').addEventListener('change', async (e)=>{
+    autoEmailFrequency = e.target.value;
+    await idbSet('autoemail-frequency', autoEmailFrequency);
+    updateAutoEmailFrequencyFieldsVisibility();
+    updateAutoEmailStatusText();
+  });
+  document.getElementById('autoEmailWeekdaySelect').addEventListener('change', async (e)=>{
+    autoEmailWeekday = parseInt(e.target.value, 10);
+    await idbSet('autoemail-weekday', autoEmailWeekday);
+    updateAutoEmailStatusText();
+  });
+  document.getElementById('autoEmailMonthDayInput').addEventListener('change', async (e)=>{
+    let v = parseInt(e.target.value, 10);
+    if(!Number.isFinite(v)) v = 1;
+    v = Math.max(1, Math.min(28, v));
+    e.target.value = v;
+    autoEmailMonthDay = v;
+    await idbSet('autoemail-monthday', autoEmailMonthDay);
+    updateAutoEmailStatusText();
+  });
+  document.getElementById('autoEmailTimeInput').addEventListener('change', async (e)=>{
+    autoEmailTime = e.target.value || '09:00';
+    await idbSet('autoemail-time', autoEmailTime);
+    updateAutoEmailStatusText();
+  });
+  document.getElementById('autoEmailIncludeManagerToggle').addEventListener('change', async (e)=>{
+    autoEmailIncludeManagerCc = e.target.checked;
+    await idbSet('autoemail-include-manager-cc', autoEmailIncludeManagerCc);
+    updateAutoEmailStatusText();
+  });
+  document.getElementById('autoEmailEnabledToggle').addEventListener('change', async (e)=>{
+    autoEmailEnabled = e.target.checked;
+    await idbSet('autoemail-enabled', autoEmailEnabled);
+    updateAutoEmailStatusText();
+    if(autoEmailEnabled){
+      startAutoEmailScheduler();
+      showToast('Automatic email sending enabled');
+    } else {
+      if(autoEmailScheduleTimer){ clearInterval(autoEmailScheduleTimer); autoEmailScheduleTimer = null; }
+      showToast('Automatic email sending disabled');
+    }
+  });
+  document.getElementById('autoEmailSendNowBtn').addEventListener('click', ()=>{
+    if(autoEmailDeliveryMode === 'mailto'){
+      openAutoEmailMailtoModal();
+    } else {
+      sendAutoEmails(false);
+    }
+  });
+  document.getElementById('autoEmailModeEmailjs').addEventListener('change', async (e)=>{
+    if(!e.target.checked) return;
+    autoEmailDeliveryMode = 'emailjs';
+    await idbSet('autoemail-delivery-mode', autoEmailDeliveryMode);
+    updateAutoEmailDeliveryModeUI();
+    updateAutoEmailStatusText();
+  });
+  document.getElementById('autoEmailModeMailto').addEventListener('change', async (e)=>{
+    if(!e.target.checked) return;
+    autoEmailDeliveryMode = 'mailto';
+    await idbSet('autoemail-delivery-mode', autoEmailDeliveryMode);
+    updateAutoEmailDeliveryModeUI();
+    updateAutoEmailStatusText();
+  });
+  document.getElementById('autoEmailMailtoComposeBtn').addEventListener('click', ()=>{
+    openAutoEmailMailtoModal();
+  });
+  document.getElementById('autoEmailMailtoDismissBtn').addEventListener('click', ()=>{
+    document.getElementById('autoEmailMailtoBanner').classList.remove('show');
+  });
+  document.getElementById('closeAutoEmailMailtoBtn').addEventListener('click', ()=>{
+    document.getElementById('autoEmailMailtoBackdrop').classList.remove('open');
+  });
+  document.getElementById('autoEmailMailtoBackdrop').addEventListener('click', (e)=>{
+    if(e.target === document.getElementById('autoEmailMailtoBackdrop')) document.getElementById('autoEmailMailtoBackdrop').classList.remove('open');
+  });
+  document.getElementById('autoEmailMailtoMarkSentBtn').addEventListener('click', ()=>{
+    markAutoEmailMailtoBatchSent();
+  });
+
   document.addEventListener('keydown', (e)=>{
     if(e.key === 'Escape'){
       if(modalBackdrop.classList.contains('open')) closeModal();
@@ -5142,6 +5644,7 @@
       if(reportBackdrop.classList.contains('open')) closeReportModal();
       if(autosaveBackdrop.classList.contains('open')) autosaveBackdrop.classList.remove('open');
       if(document.getElementById('delayedBackdrop').classList.contains('open')) document.getElementById('delayedBackdrop').classList.remove('open');
+      if(document.getElementById('autoEmailMailtoBackdrop').classList.contains('open')) document.getElementById('autoEmailMailtoBackdrop').classList.remove('open');
       if(document.getElementById('analyzeBackdrop').classList.contains('open')) document.getElementById('analyzeBackdrop').classList.remove('open');
       return;
     }
@@ -5155,6 +5658,7 @@
       || reportBackdrop.classList.contains('open')
       || autosaveBackdrop.classList.contains('open')
       || document.getElementById('delayedBackdrop').classList.contains('open')
+      || document.getElementById('autoEmailMailtoBackdrop').classList.contains('open')
       || document.getElementById('analyzeBackdrop').classList.contains('open');
     if(isTyping || anyModalOpen || e.metaKey || e.ctrlKey || e.altKey) return;
 
@@ -5201,6 +5705,8 @@
     tryReconnectAutosave();
     await loadManagerEmail();
     await loadEmailTemplate();
+    await loadAutoEmailSettings();
+    if(autoEmailEnabled) startAutoEmailScheduler();
     checkDelayedTasksOnLoad();
   }
   init();
