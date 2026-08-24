@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-24T00:07:00.052Z",
+  "exportedAt": "2026-08-24T00:08:00.062Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -461,18 +461,19 @@
     },
     "m_00tz16bv|2026-08-24": {
       "tag": "office",
-      "tasks": [],
+      "tasks": [
+        {
+          "id": "t_f7jmjbuj",
+          "date": "2026-08-24",
+          "text": "Ready new plugin, new BIR report a",
+          "status": "not-started"
+        }
+      ],
       "comment": ""
     },
     "m_jig7aydp|2026-08-24": {
       "tag": "at_tljjo94f",
       "tasks": [
-        {
-          "id": "t_j0pueqst",
-          "date": "2026-08-24",
-          "text": "SM Event Placeholder",
-          "status": "not-started"
-        },
         {
           "id": "t_5dx66t3t",
           "date": "2026-08-24",
