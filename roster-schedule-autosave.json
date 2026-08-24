@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-24T02:51:06.910Z",
+  "exportedAt": "2026-08-24T02:52:06.907Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -620,7 +620,13 @@
         {
           "id": "t_ki3fly7v",
           "date": "2026-08-26",
-          "text": "",
+          "text": "Aloha v12 plugins",
+          "status": "not-started"
+        },
+        {
+          "id": "t_rzf5bbne",
+          "date": "2026-08-26",
+          "text": "Training new employee",
           "status": "not-started"
         }
       ],
