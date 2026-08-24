@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-24T00:09:00.051Z",
+  "exportedAt": "2026-08-24T00:10:00.053Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -465,7 +465,7 @@
         {
           "id": "t_f7jmjbuj",
           "date": "2026-08-24",
-          "text": "Ready new plugin, new BIR report and test using Let's unit (aloha ",
+          "text": "Ready new plugin, new BIR report and test using Let's unit (aloha v19.9)",
           "status": "not-started"
         }
       ],
@@ -538,7 +538,14 @@
     },
     "m_00tz16bv|2026-08-25": {
       "tag": "office",
-      "tasks": [],
+      "tasks": [
+        {
+          "id": "t_tu607deg",
+          "date": "2026-08-25",
+          "text": "Ready new plugin, new BIR report and test using Let's unit (aloha v19.9)",
+          "status": "not-started"
+        }
+      ],
       "comment": ""
     },
     "m_jig7aydp|2026-08-25": {
