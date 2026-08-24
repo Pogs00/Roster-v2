@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-24T06:07:35.102Z",
+  "exportedAt": "2026-08-24T06:08:35.092Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -1288,7 +1288,7 @@
         "store": "Tori Sanwa Mitsukoshi",
         "description": "Plugin update monitoring",
         "pointPerson": "Lawrence",
-        "status": "For Internal Discussion",
+        "status": "Delayed",
         "startDate": "2026-08-19",
         "endDate": "2026-08-25",
         "reviseEndDate": "",
@@ -1312,6 +1312,10 @@
           {
             "date": "8/24/2026, 2:07:33 PM",
             "text": "During 5 days monitoring, still encountered restart and error adding item"
+          },
+          {
+            "date": "8/24/2026, 2:07:40 PM",
+            "text": "To update the plugin again today"
           }
         ]
       },
@@ -1319,7 +1323,7 @@
         "store": "Tori Sanwa Mitsukoshi",
         "description": "Regular discount default presentation format for percentage not working",
         "pointPerson": "Lawrence",
-        "status": "In Progress",
+        "status": "Delayed",
         "startDate": "2026-08-20",
         "endDate": "2026-08-24",
         "reviseEndDate": "",
