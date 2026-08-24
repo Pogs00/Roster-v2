@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-24T02:50:06.910Z",
+  "exportedAt": "2026-08-24T02:51:06.910Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -570,7 +570,7 @@
     "m_00tz16bv|2026-08-25": {
       "tag": "at_7v4aujf5",
       "tasks": [],
-      "comment": "C"
+      "comment": "CTO"
     },
     "m_jig7aydp|2026-08-25": {
       "tag": "office",
@@ -604,7 +604,26 @@
     },
     "m_00tz16bv|2026-08-26": {
       "tag": "office",
-      "tasks": [],
+      "tasks": [
+        {
+          "id": "t_cbnmz62c",
+          "date": "2026-08-26",
+          "text": "MenuX v2 testing",
+          "status": "not-started"
+        },
+        {
+          "id": "t_rve9hj0p",
+          "date": "2026-08-26",
+          "text": "Aloha Report Utility",
+          "status": "not-started"
+        },
+        {
+          "id": "t_ki3fly7v",
+          "date": "2026-08-26",
+          "text": "",
+          "status": "not-started"
+        }
+      ],
       "comment": ""
     },
     "m_jig7aydp|2026-08-26": {
