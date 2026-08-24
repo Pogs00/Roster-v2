@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-24T09:56:51.591Z",
+  "exportedAt": "2026-08-24T09:57:34.512Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -520,7 +520,7 @@
           "id": "t_huqd1r40",
           "date": "2026-08-24",
           "text": "Torikizoku run through before Aug 25 presentation",
-          "status": "not-started"
+          "status": "ts_i4kzogvj"
         }
       ],
       "comment": ""
