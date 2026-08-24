@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-24T05:59:18.311Z",
+  "exportedAt": "2026-08-24T06:00:18.309Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -461,6 +461,12 @@
           "date": "2026-08-24",
           "text": "Ticket assignment",
           "status": "not-started"
+        },
+        {
+          "id": "t_hxfl7yio",
+          "date": "2026-08-24",
+          "text": "Wendy's CMS Training",
+          "status": "completed"
         }
       ],
       "comment": ""
@@ -502,12 +508,12 @@
           "id": "t_b37uxbe9",
           "date": "2026-08-24",
           "text": "Ops Meeting @2pm",
-          "status": "not-started"
+          "status": "ts_fnbk482o"
         },
         {
-          "id": "t_6qtem9i4",
+          "id": "t_e4ybt7vp",
           "date": "2026-08-24",
-          "text": "Wendy's CMS Training",
+          "text": "Tori Sanwa plugin update with S' Harmon",
           "status": "not-started"
         }
       ],
