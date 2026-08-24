@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-24T09:57:34.512Z",
+  "exportedAt": "2026-08-24T09:58:34.510Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -101,7 +101,7 @@
     },
     {
       "id": "ts_6jxo1r4g",
-      "label": "For Continuation",
+      "label": "Pending",
       "color": "#0891B2"
     }
   ],
