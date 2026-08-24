@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-24T02:53:06.905Z",
+  "exportedAt": "2026-08-24T02:54:06.898Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -547,12 +547,6 @@
           "status": "not-started"
         },
         {
-          "id": "t_grtoe336",
-          "date": "2026-08-27",
-          "text": "Aloha Report Utility",
-          "status": "not-started"
-        },
-        {
           "id": "t_m6ga3g8c",
           "date": "2026-08-27",
           "text": "Aloha v12 plugins",
@@ -682,7 +676,20 @@
     },
     "m_00tz16bv|2026-08-28": {
       "tag": "at_gfigh1b7",
-      "tasks": [],
+      "tasks": [
+        {
+          "id": "t_cnsaobzu",
+          "date": "2026-08-28",
+          "text": "MenuX v2 testing",
+          "status": "not-started"
+        },
+        {
+          "id": "t_0kgotaie",
+          "date": "2026-08-28",
+          "text": "Aloha v12 plugins",
+          "status": "not-started"
+        }
+      ],
       "comment": ""
     },
     "m_jig7aydp|2026-08-28": {
