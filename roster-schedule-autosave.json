@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-25T09:43:16.825Z",
+  "exportedAt": "2026-08-25T09:44:16.810Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -1347,6 +1347,10 @@
           {
             "date": "8/25/2026, 11:10:04 AM",
             "text": "Blank kiosk order, but textfile present in menuX folder"
+          },
+          {
+            "date": "8/25/2026, 5:43:48 PM",
+            "text": "Load new update today"
           }
         ]
       },
@@ -1366,6 +1370,10 @@
           {
             "date": "8/25/2026, 7:44:59 AM",
             "text": "Waiting for the new release today"
+          },
+          {
+            "date": "8/25/2026, 5:43:56 PM",
+            "text": "Load new update today"
           }
         ]
       }
