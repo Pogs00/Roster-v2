@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-25T09:48:16.774Z",
+  "exportedAt": "2026-08-25T09:48:40.675Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -1301,7 +1301,7 @@
         "status": "In Progress",
         "startDate": "2026-08-19",
         "endDate": "2026-08-27",
-        "reviseEndDate": "",
+        "reviseEndDate": "2026-09-02",
         "remarks": [
           {
             "date": "8/18/2026, 6:12:03 PM",
