@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-25T09:44:16.810Z",
+  "exportedAt": "2026-08-25T09:45:16.795Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -1166,7 +1166,8 @@
       "Delayed",
       "For Internal Discussion",
       "For Client Confirmation",
-      "For Testing"
+      "For Testing",
+      "For Monitoring"
     ],
     "tasks": [
       {
@@ -1281,6 +1282,10 @@
           {
             "date": "8/25/2026, 7:45:43 AM",
             "text": "Continuation testing this morning, and presentation in the afternoon"
+          },
+          {
+            "date": "8/25/2026, 5:45:11 PM",
+            "text": "With minimal concern, to be update c/o Dev team"
           }
         ]
       },
@@ -1311,7 +1316,7 @@
         "store": "Tori Sanwa Mitsukoshi",
         "description": "Plugin update monitoring",
         "pointPerson": "Lawrence",
-        "status": "In Progress",
+        "status": "For Monitoring",
         "startDate": "2026-08-19",
         "endDate": "2026-08-25",
         "reviseEndDate": "",
@@ -1358,7 +1363,7 @@
         "store": "Tori Sanwa Mitsukoshi",
         "description": "Regular discount default presentation format for percentage not working",
         "pointPerson": "Lawrence",
-        "status": "Delayed",
+        "status": "For Monitoring",
         "startDate": "2026-08-20",
         "endDate": "2026-08-24",
         "reviseEndDate": "",
