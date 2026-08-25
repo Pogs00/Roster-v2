@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-25T09:49:16.771Z",
+  "exportedAt": "2026-08-25T09:50:16.785Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -598,7 +598,13 @@
           "id": "t_zcx9g5ix",
           "date": "2026-08-25",
           "text": "Tori Sanwa plugin update testing",
-          "status": "not-started"
+          "status": "completed"
+        },
+        {
+          "id": "t_exonn8l8",
+          "date": "2026-08-25",
+          "text": "Tori Sanwa plugin update in store",
+          "status": "completed"
         }
       ],
       "comment": ""
@@ -621,7 +627,7 @@
           "id": "t_e88pesvt",
           "date": "2026-08-25",
           "text": "Tori Sanwa testing",
-          "status": "not-started"
+          "status": "completed"
         }
       ],
       "comment": ""
