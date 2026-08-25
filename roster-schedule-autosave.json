@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-24T23:41:03.535Z",
+  "exportedAt": "2026-08-25T03:09:18.045Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -490,7 +490,7 @@
           "id": "t_kmxkriww",
           "date": "2026-08-24",
           "text": "Training Afternoon menux",
-          "status": "not-started"
+          "status": "completed"
         }
       ],
       "comment": ""
@@ -514,7 +514,7 @@
           "id": "t_e4ybt7vp",
           "date": "2026-08-24",
           "text": "Tori Sanwa plugin update with S' Harmon",
-          "status": "in-progress"
+          "status": "ts_6jxo1r4g"
         },
         {
           "id": "t_huqd1r40",
@@ -523,7 +523,7 @@
           "status": "ts_i4kzogvj"
         }
       ],
-      "comment": ""
+      "comment": "For tori sanwa waiting for S' Harmon's feedback, for Torikizoku for continuation of testing tomorrow morning"
     },
     "m_lnyo2eed|2026-08-27": {
       "tag": "office",
@@ -592,6 +592,12 @@
           "id": "t_j22iilt5",
           "date": "2026-08-25",
           "text": "Ticket assignment",
+          "status": "completed"
+        },
+        {
+          "id": "t_zcx9g5ix",
+          "date": "2026-08-25",
+          "text": "Tori Sanwa plugin update testing",
           "status": "not-started"
         }
       ],
@@ -605,12 +611,6 @@
     "m_jig7aydp|2026-08-25": {
       "tag": "office",
       "tasks": [
-        {
-          "id": "t_umxummec",
-          "date": "2026-08-25",
-          "text": "Starbucks Digital Menu Board Demo",
-          "status": "not-started"
-        },
         {
           "id": "t_824b7h4a",
           "date": "2026-08-25",
@@ -1146,7 +1146,7 @@
       "comment": ""
     },
     "m_00tz16bv|2026-08-23": {
-      "tag": "at_jida8xir",
+      "tag": "at_3yzk9gc2",
       "tasks": [
         {
           "id": "t_ib3px7ky",
@@ -1215,10 +1215,10 @@
         "store": "All Stores",
         "description": "menuX v2 text file validation",
         "pointPerson": "Harmon / Kent",
-        "status": "In Progress",
+        "status": "Delayed",
         "startDate": "2026-08-03",
         "endDate": "2026-08-19",
-        "reviseEndDate": "",
+        "reviseEndDate": "2026-08-28",
         "remarks": [
           {
             "date": "8/18/2026, 6:09:28 PM",
@@ -1227,6 +1227,10 @@
           {
             "date": "8/19/2026, 2:32:02 PM",
             "text": "Update to S' Raven, he will coordinate with Dev"
+          },
+          {
+            "date": "8/25/2026, 7:46:07 AM",
+            "text": "No feedback"
           }
         ]
       },
@@ -1234,10 +1238,10 @@
         "store": "All V19 Stores",
         "description": "BIR Report Utility",
         "pointPerson": "Nelson",
-        "status": "In Progress",
+        "status": "Delayed",
         "startDate": "2026-08-17",
         "endDate": "2026-08-21",
-        "reviseEndDate": "",
+        "reviseEndDate": "2026-08-26",
         "remarks": [
           {
             "date": "8/18/2026, 6:10:59 PM",
@@ -1246,6 +1250,10 @@
           {
             "date": "8/19/2026, 2:32:09 PM",
             "text": "Update to S' Raven, he will coordinate with Dev"
+          },
+          {
+            "date": "8/25/2026, 7:45:59 AM",
+            "text": "No feedback"
           }
         ]
       },
@@ -1256,7 +1264,7 @@
         "status": "For Testing",
         "startDate": "2026-08-17",
         "endDate": "2026-08-24",
-        "reviseEndDate": "",
+        "reviseEndDate": "2026-08-25",
         "remarks": [
           {
             "date": "8/18/2026, 6:11:20 PM",
@@ -1269,6 +1277,10 @@
           {
             "date": "8/20/2026, 6:05:53 PM",
             "text": "Perform run through today, so far minimal error and pending, for continuation on Monday"
+          },
+          {
+            "date": "8/25/2026, 7:45:43 AM",
+            "text": "Continuation testing this morning, and presentation in the afternoon"
           }
         ]
       },
@@ -1288,6 +1300,10 @@
           {
             "date": "8/19/2026, 2:32:54 PM",
             "text": "Coordinate to Dev team already, waiting for timeline"
+          },
+          {
+            "date": "8/25/2026, 7:45:09 AM",
+            "text": "For follow up today"
           }
         ]
       },
@@ -1295,7 +1311,7 @@
         "store": "Tori Sanwa Mitsukoshi",
         "description": "Plugin update monitoring",
         "pointPerson": "Lawrence",
-        "status": "Delayed",
+        "status": "In Progress",
         "startDate": "2026-08-19",
         "endDate": "2026-08-25",
         "reviseEndDate": "",
@@ -1323,6 +1339,10 @@
           {
             "date": "8/24/2026, 2:07:40 PM",
             "text": "To update the plugin again today"
+          },
+          {
+            "date": "8/25/2026, 7:44:38 AM",
+            "text": "Waiting for the new release today"
           }
         ]
       },
@@ -1338,6 +1358,10 @@
           {
             "date": "8/21/2026, 3:56:33 PM",
             "text": "Coordinated with S' Harmon but no feedback yet"
+          },
+          {
+            "date": "8/25/2026, 7:44:59 AM",
+            "text": "Waiting for the new release today"
           }
         ]
       }
