@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-25T09:45:16.795Z",
+  "exportedAt": "2026-08-25T09:46:16.789Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -1167,7 +1167,8 @@
       "For Internal Discussion",
       "For Client Confirmation",
       "For Testing",
-      "For Monitoring"
+      "For Monitoring",
+      "For Bug Fixing"
     ],
     "tasks": [
       {
@@ -1293,7 +1294,7 @@
         "store": "Let's Eat Rockwell Pasig",
         "description": "SOK Development",
         "pointPerson": "Kent",
-        "status": "Not Started",
+        "status": "In Progress",
         "startDate": "2026-08-19",
         "endDate": "2026-08-27",
         "reviseEndDate": "",
