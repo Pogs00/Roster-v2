@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-25T09:48:40.675Z",
+  "exportedAt": "2026-08-25T09:49:16.771Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -615,6 +615,12 @@
           "id": "t_824b7h4a",
           "date": "2026-08-25",
           "text": "Torikizoku KDS presentation and status update @1pm",
+          "status": "completed"
+        },
+        {
+          "id": "t_e88pesvt",
+          "date": "2026-08-25",
+          "text": "Tori Sanwa testing",
           "status": "not-started"
         }
       ],
