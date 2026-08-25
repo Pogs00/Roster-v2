@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-25T09:46:16.789Z",
+  "exportedAt": "2026-08-25T09:47:16.774Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -1263,7 +1263,7 @@
         "store": "Torikizoku Serendra",
         "description": "KDS Development",
         "pointPerson": "Von",
-        "status": "For Testing",
+        "status": "For Bug Fixing",
         "startDate": "2026-08-17",
         "endDate": "2026-08-24",
         "reviseEndDate": "2026-08-25",
@@ -1310,6 +1310,10 @@
           {
             "date": "8/25/2026, 7:45:09 AM",
             "text": "For follow up today"
+          },
+          {
+            "date": "8/25/2026, 5:46:30 PM",
+            "text": "Started the development today"
           }
         ]
       },
