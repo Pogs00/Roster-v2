@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-25T10:08:16.769Z",
+  "exportedAt": "2026-08-25T10:08:47.130Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -604,6 +604,12 @@
           "id": "t_exonn8l8",
           "date": "2026-08-25",
           "text": "Tori Sanwa plugin update in store",
+          "status": "completed"
+        },
+        {
+          "id": "t_clmmzuno",
+          "date": "2026-08-25",
+          "text": "UCC Bridgetowne – BIR Report installation and Configuration",
           "status": "completed"
         }
       ],
