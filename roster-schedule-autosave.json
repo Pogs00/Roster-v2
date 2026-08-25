@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-25T09:47:16.774Z",
+  "exportedAt": "2026-08-25T09:48:16.774Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -1265,8 +1265,8 @@
         "pointPerson": "Von",
         "status": "For Bug Fixing",
         "startDate": "2026-08-17",
-        "endDate": "2026-08-24",
-        "reviseEndDate": "2026-08-25",
+        "endDate": "2026-08-25",
+        "reviseEndDate": "2026-09-02",
         "remarks": [
           {
             "date": "8/18/2026, 6:11:20 PM",
@@ -1287,6 +1287,10 @@
           {
             "date": "8/25/2026, 5:45:11 PM",
             "text": "With minimal concern, to be update c/o Dev team"
+          },
+          {
+            "date": "8/25/2026, 5:47:26 PM",
+            "text": "Old revise date 08/25/2026"
           }
         ]
       },
