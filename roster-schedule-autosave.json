@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-26T01:52:09.643Z",
+  "exportedAt": "2026-08-26T06:25:40.999Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -687,12 +687,18 @@
           "id": "t_7hppe2hu",
           "date": "2026-08-26",
           "text": "Tori Sanwa menuX® Meeting F2F @10am",
-          "status": "in-progress"
+          "status": "completed"
         },
         {
           "id": "t_q5lr6ioi",
           "date": "2026-08-26",
           "text": "Create PPT presentation for Tori Sanwa",
+          "status": "completed"
+        },
+        {
+          "id": "t_q8e8bviv",
+          "date": "2026-08-26",
+          "text": "Create minutes of meeting and send it to all stakeholders",
           "status": "completed"
         }
       ],
