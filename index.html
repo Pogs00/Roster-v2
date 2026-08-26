@@ -2267,22 +2267,50 @@
   }
 
   // Validation logic: checks if task is completed/closed or if due date has passed compared to current date
-  function getTaskValidation(taskDateStr, taskStatusId){
-    const todayStr = dateKey(today);
-    if(!taskDateStr) return { isDelayed: false, label: 'On Time', class: 'ontime' };
-    
-    const stObj = findTag(taskStatuses, taskStatusId);
-    const isCompleted = stObj && (stObj.label.toLowerCase().includes('complet') || stObj.label.toLowerCase().includes('done') || stObj.label.toLowerCase().includes('closed'));
+function getTaskValidation(taskDateStr, taskStatusId){
+  const todayStr = dateKey(today);
 
-    if(isCompleted) {
-      return { isDelayed: false, label: 'On Time', class: 'ontime' };
-    }
-
-    if(taskDateStr < todayStr){
-      return { isDelayed: true, label: 'Delayed', class: 'delayed' };
-    }
-    return { isDelayed: false, label: 'On Time', class: 'ontime' };
+  if(!taskDateStr){
+    return {
+      isDelayed: false,
+      label: 'On Time',
+      class: 'ontime'
+    };
   }
+
+  const stObj = findTag(taskStatuses, taskStatusId);
+  const statusLabel = (stObj?.label || '').toLowerCase();
+
+  // Treat completed, done, closed, and cancelled tasks as on time
+  const isClosedStatus =
+    statusLabel.includes('complet') ||
+    statusLabel.includes('done') ||
+    statusLabel.includes('closed') ||
+    statusLabel.includes('cancel');
+
+  if(isClosedStatus){
+    return {
+      isDelayed: false,
+      label: 'On Time',
+      class: 'ontime'
+    };
+  }
+
+  if(taskDateStr < todayStr){
+    return {
+      isDelayed: true,
+      label: 'Delayed',
+      class: 'delayed'
+    };
+  }
+
+  return {
+    isDelayed: false,
+    label: 'On Time',
+    class: 'ontime'
+  };
+}
+``
 
   /* ---------------- toast ---------------- */
   let toastTimer = null;
