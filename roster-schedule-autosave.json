@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-26T09:47:18.425Z",
+  "exportedAt": "2026-08-26T09:48:18.656Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -675,7 +675,7 @@
           "id": "t_a7n1jfp5",
           "date": "2026-08-26",
           "text": "Assist on UCC store BIR concern",
-          "status": "in-progress"
+          "status": "completed"
         },
         {
           "id": "t_t2197yg3",
@@ -687,7 +687,7 @@
           "id": "t_9upt4tla",
           "date": "2026-08-26",
           "text": "Torisanwa update monitoring",
-          "status": "in-progress"
+          "status": "completed"
         },
         {
           "id": "t_gyky8qg6",
@@ -696,7 +696,7 @@
           "status": "completed"
         }
       ],
-      "comment": ""
+      "comment": "Tori Sanwa no issue encountered so far"
     },
     "m_00tz16bv|2026-08-26": {
       "tag": "at_7v4aujf5",
