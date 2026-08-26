@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-26T09:34:25.672Z",
+  "exportedAt": "2026-08-26T09:35:18.460Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -587,6 +587,12 @@
           "date": "2026-08-27",
           "text": "Let's Eat Aloha and Plugin testing",
           "status": "not-started"
+        },
+        {
+          "id": "t_p76a22k2",
+          "date": "2026-08-27",
+          "text": "",
+          "status": "not-started"
         }
       ],
       "comment": ""
@@ -741,6 +747,12 @@
           "id": "t_q8e8bviv",
           "date": "2026-08-26",
           "text": "Create minutes of meeting and send it to all stakeholders",
+          "status": "completed"
+        },
+        {
+          "id": "t_u1fgeftx",
+          "date": "2026-08-26",
+          "text": "Task update with Dev",
           "status": "completed"
         }
       ],
