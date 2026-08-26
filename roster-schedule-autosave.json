@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-26T00:02:08.186Z",
+  "exportedAt": "2026-08-26T00:03:08.199Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -651,34 +651,34 @@
       "comment": ""
     },
     "m_00tz16bv|2026-08-26": {
-      "tag": "office",
+      "tag": "at_7v4aujf5",
       "tasks": [
         {
           "id": "t_cbnmz62c",
           "date": "2026-08-26",
           "text": "MenuX v2 testing",
-          "status": "not-started"
+          "status": "ts_6jxo1r4g"
         },
         {
           "id": "t_rve9hj0p",
           "date": "2026-08-26",
           "text": "Aloha Report Utility",
-          "status": "not-started"
+          "status": "ts_6jxo1r4g"
         },
         {
           "id": "t_ki3fly7v",
           "date": "2026-08-26",
           "text": "Aloha v12 plugins",
-          "status": "not-started"
+          "status": "ts_6jxo1r4g"
         },
         {
           "id": "t_rzf5bbne",
           "date": "2026-08-26",
           "text": "Training new employee",
-          "status": "not-started"
+          "status": "ts_6jxo1r4g"
         }
       ],
-      "comment": ""
+      "comment": "SL"
     },
     "m_jig7aydp|2026-08-26": {
       "tag": "office",
@@ -688,6 +688,12 @@
           "date": "2026-08-26",
           "text": "Tori Sanwa menuX® Meeting F2F @10am",
           "status": "not-started"
+        },
+        {
+          "id": "t_q5lr6ioi",
+          "date": "2026-08-26",
+          "text": "Create PPT presentation for Tori Sanwa",
+          "status": "in-progress"
         }
       ],
       "comment": ""
