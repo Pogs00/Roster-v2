@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-26T00:03:08.199Z",
+  "exportedAt": "2026-08-26T00:04:08.201Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -514,13 +514,13 @@
           "id": "t_e4ybt7vp",
           "date": "2026-08-24",
           "text": "Tori Sanwa plugin update with S' Harmon",
-          "status": "ts_6jxo1r4g"
+          "status": "completed"
         },
         {
           "id": "t_huqd1r40",
           "date": "2026-08-24",
           "text": "Torikizoku run through before Aug 25 presentation",
-          "status": "ts_i4kzogvj"
+          "status": "completed"
         }
       ],
       "comment": "For tori sanwa waiting for S' Harmon's feedback, for Torikizoku for continuation of testing tomorrow morning"
