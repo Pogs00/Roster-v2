@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-26T07:40:26.031Z",
+  "exportedAt": "2026-08-26T07:41:18.795Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -645,6 +645,24 @@
           "id": "t_8z3n4jso",
           "date": "2026-08-26",
           "text": "Ticket assignment",
+          "status": "completed"
+        },
+        {
+          "id": "t_xy0qav7d",
+          "date": "2026-08-26",
+          "text": "UCC Bridgetown – License update and Coordination on how to get the ff ( Zread, Sales Summary and Ejournal)",
+          "status": "completed"
+        },
+        {
+          "id": "t_jxckqovj",
+          "date": "2026-08-26",
+          "text": "Support Meeting",
+          "status": "completed"
+        },
+        {
+          "id": "t_a7n1jfp5",
+          "date": "2026-08-26",
+          "text": "Assist on UCC store BIR concern",
           "status": "not-started"
         }
       ],
