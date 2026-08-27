@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-27T01:00:59.323Z",
+  "exportedAt": "2026-08-27T01:01:59.311Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -578,14 +578,14 @@
         {
           "id": "t_zp7rtjf6",
           "date": "2026-08-27",
-          "endDate": "",
+          "endDate": "2026-08-28",
           "text": "Let's Eat Aloha and Plugin testing",
           "status": "not-started"
         },
         {
           "id": "t_p76a22k2",
           "date": "2026-08-27",
-          "endDate": "",
+          "endDate": "2026-08-28",
           "text": "Let's SOK and Digital Menu Board setup",
           "status": "not-started"
         }
