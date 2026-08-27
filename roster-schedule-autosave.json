@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-27T01:11:59.275Z",
+  "exportedAt": "2026-08-27T01:12:59.278Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -709,13 +709,6 @@
     "m_00tz16bv|2026-08-26": {
       "tag": "at_7v4aujf5",
       "tasks": [
-        {
-          "id": "t_rzf5bbne",
-          "date": "2026-08-26",
-          "endDate": "2026-08-28",
-          "text": "Training new employee",
-          "status": "ts_6jxo1r4g"
-        },
         {
           "id": "t_fpj9bqmk",
           "date": "2026-08-26",
