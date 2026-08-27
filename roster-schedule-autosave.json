@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-27T01:02:59.298Z",
+  "exportedAt": "2026-08-27T01:03:59.296Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -905,7 +905,22 @@
     },
     "m_jig7aydp|2026-09-01": {
       "tag": "office",
-      "tasks": [],
+      "tasks": [
+        {
+          "id": "t_a29eifw3",
+          "date": "2026-09-01",
+          "endDate": "",
+          "text": "Retail Meeting @9am",
+          "status": "not-started"
+        },
+        {
+          "id": "t_p2uelf3b",
+          "date": "2026-09-01",
+          "endDate": "",
+          "text": "Ops Meeting @2pm",
+          "status": "not-started"
+        }
+      ],
       "comment": ""
     },
     "m_lnyo2eed|2026-09-01": {
