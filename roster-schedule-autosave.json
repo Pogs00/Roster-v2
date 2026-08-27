@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-27T00:54:59.323Z",
+  "exportedAt": "2026-08-27T00:55:59.336Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -769,7 +769,7 @@
         {
           "id": "t_cbnmz62c",
           "date": "2026-08-26",
-          "endDate": "",
+          "endDate": "2026-08-28",
           "text": "MenuX v2 testing",
           "status": "ts_6jxo1r4g"
         },
@@ -783,7 +783,7 @@
         {
           "id": "t_ki3fly7v",
           "date": "2026-08-26",
-          "endDate": "",
+          "endDate": "2026-08-28",
           "text": "Aloha v12 plugins",
           "status": "ts_6jxo1r4g"
         },
@@ -846,22 +846,7 @@
     },
     "m_00tz16bv|2026-08-28": {
       "tag": "at_gfigh1b7",
-      "tasks": [
-        {
-          "id": "t_cnsaobzu",
-          "date": "2026-08-28",
-          "endDate": "",
-          "text": "MenuX v2 testing",
-          "status": "not-started"
-        },
-        {
-          "id": "t_0kgotaie",
-          "date": "2026-08-28",
-          "endDate": "",
-          "text": "Aloha v12 plugins",
-          "status": "not-started"
-        }
-      ],
+      "tasks": [],
       "comment": ""
     },
     "m_jig7aydp|2026-08-28": {
