@@ -3509,12 +3509,37 @@ function getTaskValidation(taskDateStr, taskStatusId){
      still only ever stored once, under the entry for the day it was added
      on. These helpers let the calendar (and the weekly report/email) show
      the task on every day in its range without the task needing to be
-     re-added on each date. */
+     re-added on each date.
+
+     Carry-over skips Saturdays, Sundays, and any day whose attendance tag
+     is labeled "Holiday" (case-insensitive) — those days are left out of
+     the range entirely, even in the middle of a multi-day task. The task's
+     actual start day is always shown regardless, since that's the day it
+     was explicitly added on. */
   function taskRangeStart(tsk, ownerDateKey){ return tsk.date || ownerDateKey; }
   function taskRangeEnd(tsk, ownerDateKey){
     const end = tsk.endDate || taskRangeStart(tsk, ownerDateKey);
     // Guard against an end date accidentally set before the start date.
     return end < taskRangeStart(tsk, ownerDateKey) ? taskRangeStart(tsk, ownerDateKey) : end;
+  }
+
+  function isWeekendDateKey(dateKeyStr){
+    const [y, mo, d] = dateKeyStr.split('-').map(Number);
+    const dow = new Date(y, mo - 1, d).getDay();
+    return dow === 0 || dow === 6;
+  }
+
+  function isHolidayTagId(tagId){
+    if(!tagId) return false;
+    const tagInfo = findTag(attendanceTags, tagId);
+    return !!(tagInfo && /holiday/i.test(tagInfo.label));
+  }
+
+  function isCarryOverSkippedDate(memberId, dateKeyStr){
+    if(isWeekendDateKey(dateKeyStr)) return true;
+    const entry = scheduleData[memberId + '|' + dateKeyStr];
+    const tagId = entry && entry.tag ? entry.tag : '';
+    return isHolidayTagId(tagId);
   }
 
   function getActiveTasksForMemberDate(memberId, dateKeyStr){
@@ -3528,9 +3553,12 @@ function getTaskValidation(taskDateStr, taskStatusId){
       ent.tasks.forEach(tsk=>{
         const start = taskRangeStart(tsk, ownerDateKey);
         const end = taskRangeEnd(tsk, ownerDateKey);
-        if(dateKeyStr >= start && dateKeyStr <= end){
-          active.push({ task: tsk, ownerKey: k, ownerDateKey, isStart: dateKeyStr === start, isEnd: dateKeyStr === end });
-        }
+        if(dateKeyStr < start || dateKeyStr > end) return;
+        const isStart = dateKeyStr === start;
+        // Only skip weekend/holiday days for the *carried-over* portion of
+        // the range — the explicit start day always shows.
+        if(!isStart && isCarryOverSkippedDate(memberId, dateKeyStr)) return;
+        active.push({ task: tsk, ownerKey: k, ownerDateKey, isStart, isEnd: dateKeyStr === end });
       });
     }
     return active;
@@ -3834,7 +3862,7 @@ function getTaskValidation(taskDateStr, taskStatusId){
           if(tsk.endDate && tsk.endDate !== tsk.date){
             const hint = document.createElement('div');
             hint.className = 'task-range-hint';
-            hint.textContent = `Carries over onto every day from ${tsk.date} through ${tsk.endDate} — no need to add it again on those dates.`;
+            hint.textContent = `Carries over onto weekdays from ${tsk.date} through ${tsk.endDate} — weekends and days tagged "Holiday" are skipped automatically, no need to add it again.`;
             itemRow.appendChild(hint);
           }
 
