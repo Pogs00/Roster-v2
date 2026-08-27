@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-27T00:17:56.827Z",
+  "exportedAt": "2026-08-27T00:18:56.631Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -562,7 +562,7 @@
           "id": "t_3g8s97na",
           "date": "2026-08-27",
           "text": "Training new employee",
-          "status": "not-started"
+          "status": "ts_6jxo1r4g"
         }
       ],
       "comment": "SL"
