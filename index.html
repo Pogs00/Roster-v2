@@ -4031,13 +4031,12 @@ function getTaskValidation(taskDateStr, taskStatusId){
         const isWeekend = (dayOfWeek === 0 || dayOfWeek === 6);
         const entry = scheduleData[m.id+'|'+key];
         const effectiveTag = entry && entry.tag !== undefined && entry.tag !== '' ? entry.tag : (isWeekend ? 'at_jida8xir' : '');
+        const activeTasks = getActiveTasksForMemberDate(m.id, key);
 
         if(effectiveTag && attTally.hasOwnProperty(effectiveTag)) attTally[effectiveTag]++;
-        if(entry && entry.tasks && entry.tasks.length){
-          entry.tasks.forEach(tsk => {
-            if(tsk.status && statusTally.hasOwnProperty(tsk.status)) statusTally[tsk.status]++;
-          });
-        }
+        activeTasks.forEach(({task: tsk}) => {
+          if(tsk.status && statusTally.hasOwnProperty(tsk.status)) statusTally[tsk.status]++;
+        });
       });
     });
 
@@ -4080,12 +4079,6 @@ function getTaskValidation(taskDateStr, taskStatusId){
       const key = dateKey(d);
       const dayOfWeek = d.getDay();
       const isWeekend = (dayOfWeek === 0 || dayOfWeek === 6);
-      
-      let dayTasksCount = 0;
-      members.forEach(m => {
-        const entry = scheduleData[m.id+'|'+key];
-        if(entry && entry.tasks && entry.tasks.length > 0) dayTasksCount += entry.tasks.length;
-      });
 
       const daySection = document.createElement('div');
       daySection.className = 'report-person';
@@ -4099,8 +4092,9 @@ function getTaskValidation(taskDateStr, taskStatusId){
       members.forEach(m => {
         const entry = scheduleData[m.id+'|'+key];
         const effectiveTag = entry && entry.tag !== undefined && entry.tag !== '' ? entry.tag : (isWeekend ? 'at_jida8xir' : '');
+        const activeTasks = getActiveTasksForMemberDate(m.id, key);
 
-        if(effectiveTag || (entry && ((entry.tasks && entry.tasks.length > 0) || entry.comment))){
+        if(effectiveTag || activeTasks.length || (entry && entry.comment)){
           hasContent = true;
           const tagInfo = effectiveTag ? (findTag(attendanceTags, effectiveTag) || {label:effectiveTag,color:'#98A2B3'}) : null;
           const color = AVATAR_COLORS[m.colorIndex % AVATAR_COLORS.length];
@@ -4113,22 +4107,23 @@ function getTaskValidation(taskDateStr, taskStatusId){
           headHtml += `</div>`;
           pBlock.innerHTML = headHtml;
 
-          if(entry && entry.tasks && entry.tasks.length){
-            entry.tasks.forEach(tsk => {
-              const statusInfo = tsk.status ? (findTag(taskStatuses, tsk.status) || {label:tsk.status,color:'#98A2B3'}) : null;
-              const valInfo = getTaskValidation(tsk.date || key, tsk.status);
-              const p = document.createElement('div');
-              p.className = 'rd-text';
-              let taskHtml = `• Task: ${escapeHtml(tsk.text || '(No description)')}`;
-              if(statusInfo){
-                const statusColor = getStatusColorHex(statusInfo);
-                taskHtml += ` <span class="badge" style="background:${mixWithWhite(statusColor,0.84)};color:${darken(statusColor,0.18)};margin-left:4px;">${escapeHtml(statusInfo.label)}</span>`;
-              }
-              taskHtml += ` <span class="badge" style="background:${valInfo.isDelayed?'#FCE8E6':'#E6F4EA'};color:${valInfo.isDelayed?'#C0221A':'#137333'};margin-left:4px;">${valInfo.label}</span>`;
-              p.innerHTML = taskHtml;
-              pBlock.appendChild(p);
-            });
-          }
+          activeTasks.forEach(({task: tsk, ownerDateKey, isStart}) => {
+            const statusInfo = tsk.status ? (findTag(taskStatuses, tsk.status) || {label:tsk.status,color:'#98A2B3'}) : null;
+            const start = taskRangeStart(tsk, ownerDateKey);
+            const end = taskRangeEnd(tsk, ownerDateKey);
+            const valInfo = getTaskValidation(start, tsk.status);
+            const p = document.createElement('div');
+            p.className = 'rd-text';
+            let taskHtml = `• Task: ${escapeHtml(tsk.text || '(No description)')}`;
+            if(!isStart) taskHtml += ` <span class="badge" style="background:#EAF0FF;color:#2F52D6;margin-left:4px;">Carried over from ${escapeHtml(start)}</span>`;
+            if(statusInfo){
+              const statusColor = getStatusColorHex(statusInfo);
+              taskHtml += ` <span class="badge" style="background:${mixWithWhite(statusColor,0.84)};color:${darken(statusColor,0.18)};margin-left:4px;">${escapeHtml(statusInfo.label)}</span>`;
+            }
+            taskHtml += ` <span class="badge" style="background:${valInfo.isDelayed?'#FCE8E6':'#E6F4EA'};color:${valInfo.isDelayed?'#C0221A':'#137333'};margin-left:4px;">${valInfo.label}</span>`;
+            p.innerHTML = taskHtml;
+            pBlock.appendChild(p);
+          });
 
           if(entry && entry.comment){
             const p = document.createElement('div');
@@ -4172,21 +4167,23 @@ function getTaskValidation(taskDateStr, taskStatusId){
       members.forEach(m => {
         const entry = scheduleData[m.id+'|'+key];
         const effectiveTag = entry && entry.tag !== undefined && entry.tag !== '' ? entry.tag : (isWeekend ? 'at_jida8xir' : '');
+        const activeTasks = getActiveTasksForMemberDate(m.id, key);
 
-        if(effectiveTag || (entry && ((entry.tasks && entry.tasks.length > 0) || entry.comment))){
+        if(effectiveTag || activeTasks.length || (entry && entry.comment)){
           any = true;
           const tagInfo = effectiveTag ? findTag(attendanceTags, effectiveTag) : null;
           let line = '  - ' + m.name;
           if(tagInfo) line += ' [Attendance: ' + tagInfo.label + ']';
           lines.push(line);
-          if(entry && entry.tasks && entry.tasks.length){
-            entry.tasks.forEach(tsk => {
-              const statusInfo = tsk.status ? findTag(taskStatuses, tsk.status) : null;
-              const valInfo = getTaskValidation(tsk.date || key, tsk.status);
-              const statusColorTag = statusInfo ? ' {color:' + getStatusColorHex(statusInfo) + '}' : '';
-              lines.push(`    * Task: ${tsk.text || '(No description)'} (${statusInfo ? statusInfo.label : 'No status'}${statusColorTag}) [${valInfo.label}]`);
-            });
-          }
+          activeTasks.forEach(({task: tsk, ownerDateKey, isStart}) => {
+            const statusInfo = tsk.status ? findTag(taskStatuses, tsk.status) : null;
+            const start = taskRangeStart(tsk, ownerDateKey);
+            const end = taskRangeEnd(tsk, ownerDateKey);
+            const valInfo = getTaskValidation(start, tsk.status);
+            const statusColorTag = statusInfo ? ' {color:' + getStatusColorHex(statusInfo) + '}' : '';
+            const carryTag = !isStart ? ' [Carried over from ' + start + ']' : '';
+            lines.push(`    * Task: ${tsk.text || '(No description)'} (${statusInfo ? statusInfo.label : 'No status'}${statusColorTag}) [${valInfo.label}]${carryTag}`);
+          });
           if(entry && entry.comment) lines.push('    * Summary: ' + entry.comment);
         }
       });
@@ -4216,7 +4213,7 @@ function getTaskValidation(taskDateStr, taskStatusId){
     for(let i=0;i<7;i++) weekDates.push(addDays(reportWeekStart, i));
     
     let csvRows = [];
-    csvRows.push(['Date Logged', 'Task Date', 'Day', 'Teammate', 'Attendance', 'Task / Note', 'Task Status', 'Status Color', 'Validation', 'Daily Summary'].map(v => `"${v}"`).join(','));
+    csvRows.push(['Date Logged', 'Task Date', 'Day', 'Teammate', 'Attendance', 'Task / Note', 'Task Status', 'Status Color', 'Validation', 'Carried Over', 'Daily Summary'].map(v => `"${v}"`).join(','));
 
     weekDates.forEach(d => {
       const key = dateKey(d);
@@ -4231,10 +4228,11 @@ function getTaskValidation(taskDateStr, taskStatusId){
         const tagInfo = effectiveTag ? findTag(attendanceTags, effectiveTag) : null;
         const attLabel = tagInfo ? tagInfo.label : '';
         const comment = entry && entry.comment ? entry.comment : '';
+        const activeTasks = getActiveTasksForMemberDate(m.id, key);
 
-        if(entry && entry.tasks && entry.tasks.length > 0){
-          entry.tasks.forEach(tsk => {
-            const taskDate = tsk.date || key;
+        if(activeTasks.length){
+          activeTasks.forEach(({task: tsk, ownerDateKey, isStart}) => {
+            const taskDate = taskRangeStart(tsk, ownerDateKey);
             const statusInfo = tsk.status ? findTag(taskStatuses, tsk.status) : null;
             const statusLabel = statusInfo ? statusInfo.label : '';
             const statusColor = statusInfo ? getStatusColorHex(statusInfo) : '';
@@ -4249,6 +4247,7 @@ function getTaskValidation(taskDateStr, taskStatusId){
               statusLabel,
               statusColor,
               valInfo.label,
+              isStart ? '' : ('Yes, from ' + taskDate),
               comment
             ];
             csvRows.push(row.map(val => `"${String(val).replace(/"/g, '""')}"`).join(','));
@@ -4260,6 +4259,7 @@ function getTaskValidation(taskDateStr, taskStatusId){
             dayName,
             m.name,
             attLabel,
+            '',
             '',
             '',
             '',
