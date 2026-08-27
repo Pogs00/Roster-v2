@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-27T01:29:28.597Z",
+  "exportedAt": "2026-08-27T01:30:28.611Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -379,7 +379,7 @@
         {
           "id": "t_r1nniyd1",
           "date": "2026-08-17",
-          "endDate": "",
+          "endDate": "2026-08-28",
           "text": "Aloha Report Utility",
           "status": "ts_6jxo1r4g"
         }
@@ -473,15 +473,7 @@
     },
     "m_00tz16bv|2026-08-24": {
       "tag": "office",
-      "tasks": [
-        {
-          "id": "t_6vcm53pp",
-          "date": "2026-08-24",
-          "endDate": "2026-08-28",
-          "text": "Aloha Report Utility",
-          "status": "ts_6jxo1r4g"
-        }
-      ],
+      "tasks": [],
       "comment": ""
     },
     "m_jig7aydp|2026-08-24": {
