@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-27T06:33:27.691Z",
+  "exportedAt": "2026-08-27T06:34:28.284Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -909,8 +909,8 @@
         {
           "id": "t_r3qiiv7d",
           "date": "2026-09-02",
-          "endDate": "",
-          "text": "Wendy's Manual c",
+          "endDate": "2026-09-04",
+          "text": "Wendy's manual creation",
           "status": "not-started"
         }
       ],
