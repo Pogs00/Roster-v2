@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-27T02:30:30.578Z",
+  "exportedAt": "2026-08-27T02:31:28.400Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -518,7 +518,7 @@
           "date": "2026-08-27",
           "endDate": "",
           "text": "menuX® Training",
-          "status": "not-started"
+          "status": "ts_fnbk482o"
         },
         {
           "id": "t_fxnsojvj",
@@ -543,14 +543,14 @@
           "date": "2026-08-27",
           "endDate": "",
           "text": "menuX® Training",
-          "status": "not-started"
+          "status": "ts_fnbk482o"
         },
         {
           "id": "t_zp7rtjf6",
           "date": "2026-08-27",
           "endDate": "2026-08-28",
           "text": "Let's Eat Aloha and Plugin testing",
-          "status": "not-started"
+          "status": "in-progress"
         },
         {
           "id": "t_p76a22k2",
