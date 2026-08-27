@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-27T00:55:59.336Z",
+  "exportedAt": "2026-08-27T00:56:59.330Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -520,14 +520,14 @@
         {
           "id": "t_f7jmjbuj",
           "date": "2026-08-24",
-          "endDate": "",
+          "endDate": "2026-08-28",
           "text": "MenuX v2 testing",
           "status": "ts_6jxo1r4g"
         },
         {
           "id": "t_6vcm53pp",
           "date": "2026-08-24",
-          "endDate": "",
+          "endDate": "2026-08-28",
           "text": "Aloha Report Utility",
           "status": "ts_6jxo1r4g"
         },
@@ -767,30 +767,9 @@
       "tag": "at_7v4aujf5",
       "tasks": [
         {
-          "id": "t_cbnmz62c",
-          "date": "2026-08-26",
-          "endDate": "2026-08-28",
-          "text": "MenuX v2 testing",
-          "status": "ts_6jxo1r4g"
-        },
-        {
-          "id": "t_rve9hj0p",
-          "date": "2026-08-26",
-          "endDate": "",
-          "text": "Aloha Report Utility",
-          "status": "ts_6jxo1r4g"
-        },
-        {
-          "id": "t_ki3fly7v",
-          "date": "2026-08-26",
-          "endDate": "2026-08-28",
-          "text": "Aloha v12 plugins",
-          "status": "ts_6jxo1r4g"
-        },
-        {
           "id": "t_rzf5bbne",
           "date": "2026-08-26",
-          "endDate": "",
+          "endDate": "2026-08-28",
           "text": "Training new employee",
           "status": "ts_6jxo1r4g"
         }
