@@ -937,6 +937,66 @@
     flex-shrink:0;
   }
   .task-date-input:focus{ outline:2px solid var(--brand); outline-offset:1px; }
+  .task-date-arrow{
+    color:var(--muted-2);
+    font-size:12px;
+    flex-shrink:0;
+  }
+  .task-end-date-input{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    padding:7px 8px;
+    border-radius:6px;
+    border:1px solid var(--border);
+    background:var(--surface);
+    color:var(--ink);
+    width:135px;
+    flex-shrink:0;
+  }
+  .task-end-date-input:focus{ outline:2px solid var(--brand); outline-offset:1px; }
+  .task-range-hint{
+    font-size:10.5px;
+    color:var(--muted-2);
+    font-style:italic;
+  }
+
+  /* Carried-over tasks: tasks that started on another day but whose date
+     range covers the day currently open in the modal. Shown read-only here
+     so a single multi-day task "carries over" onto every day in its range
+     instead of needing a separate task added per day. */
+  .carried-section{ margin-top:14px; }
+  .carried-section .field-label{ display:flex; align-items:center; gap:6px; }
+  .carried-task-item{
+    background:var(--surface-2);
+    border:1px dashed var(--border);
+    border-radius:8px;
+    padding:9px 10px;
+    margin-bottom:6px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .carried-task-item .carried-text{
+    flex:1;
+    font-size:12.5px;
+    color:var(--ink);
+  }
+  .carried-task-item .carried-range{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px;
+    color:var(--muted);
+    white-space:nowrap;
+  }
+  .carried-task-item .carried-jump{
+    font-size:11px;
+    padding:4px 8px;
+    background:transparent;
+    border:1px solid var(--border);
+    color:var(--brand-ink);
+    border-radius:6px;
+    white-space:nowrap;
+  }
+  .carried-task-item .carried-jump:hover{ background:var(--surface); border-color:var(--brand); }
 
   .task-item-top input[type="text"]{
     flex:1;
@@ -3443,6 +3503,39 @@ function getTaskValidation(taskDateStr, taskStatusId){
     showToast('Team Analytics PDF generated successfully');
   }
 
+  /* ---------------- multi-day task ("carry over") helpers ----------------
+     A task can optionally have an endDate. When set, the task is treated as
+     active on every date from `date` through `endDate` (inclusive) — it is
+     still only ever stored once, under the entry for the day it was added
+     on. These helpers let the calendar (and the weekly report/email) show
+     the task on every day in its range without the task needing to be
+     re-added on each date. */
+  function taskRangeStart(tsk, ownerDateKey){ return tsk.date || ownerDateKey; }
+  function taskRangeEnd(tsk, ownerDateKey){
+    const end = tsk.endDate || taskRangeStart(tsk, ownerDateKey);
+    // Guard against an end date accidentally set before the start date.
+    return end < taskRangeStart(tsk, ownerDateKey) ? taskRangeStart(tsk, ownerDateKey) : end;
+  }
+
+  function getActiveTasksForMemberDate(memberId, dateKeyStr){
+    const active = [];
+    const prefix = memberId + '|';
+    for(const k in scheduleData){
+      if(!k.startsWith(prefix)) continue;
+      const ent = scheduleData[k];
+      if(!ent || !Array.isArray(ent.tasks) || !ent.tasks.length) continue;
+      const ownerDateKey = k.slice(prefix.length);
+      ent.tasks.forEach(tsk=>{
+        const start = taskRangeStart(tsk, ownerDateKey);
+        const end = taskRangeEnd(tsk, ownerDateKey);
+        if(dateKeyStr >= start && dateKeyStr <= end){
+          active.push({ task: tsk, ownerKey: k, ownerDateKey, isStart: dateKeyStr === start, isEnd: dateKeyStr === end });
+        }
+      });
+    }
+    return active;
+  }
+
   /* ---------------- calendar rendering ---------------- */
   function renderCalendar(){
     const year = currentDate.getFullYear();
@@ -3477,9 +3570,14 @@ function getTaskValidation(taskDateStr, taskStatusId){
       members.forEach(m=>{
         const entry = scheduleData[m.id+'|'+key];
         let effectiveTag = entry && entry.tag !== undefined && entry.tag !== '' ? entry.tag : (isWeekend ? 'at_jida8xir' : '');
-        const hasTasksOrComment = entry && ((entry.tasks && entry.tasks.length > 0) || entry.comment);
+        // Active tasks includes both tasks that started today AND multi-day
+        // tasks (with an endDate) that started on an earlier day but whose
+        // range still covers today — so a 3-day task automatically "carries
+        // over" onto each of its days without being re-added.
+        const activeTasks = getActiveTasksForMemberDate(m.id, key);
+        const hasTasksOrComment = activeTasks.length > 0 || (entry && entry.comment);
 
-        if(effectiveTag || hasTasksOrChip(entry)){
+        if(effectiveTag || hasTasksOrComment){
           anyChip = true;
           const tagInfo = effectiveTag ? (findTag(attendanceTags, effectiveTag) || { label: effectiveTag, color:'#98A2B3' }) : null;
           const chipColor = tagInfo ? tagInfo.color : '#375DFB';
@@ -3489,18 +3587,21 @@ function getTaskValidation(taskDateStr, taskStatusId){
           chip.style.color = darken(chipColor, 0.18);
           let titleParts = [m.name];
           if(tagInfo) titleParts.push(tagInfo.label);
-          if(entry && entry.tasks && entry.tasks.length){
-            entry.tasks.forEach(tsk => {
+          if(activeTasks.length){
+            activeTasks.forEach(({task: tsk, ownerDateKey, isStart, isEnd}) => {
               const stInfo = findTag(taskStatuses, tsk.status);
-              const valInfo = getTaskValidation(tsk.date || key, tsk.status);
-              titleParts.push(`• [${tsk.date || key}] ${tsk.text} (${stInfo ? stInfo.label : 'No status'} - ${valInfo.label})`);
+              const start = taskRangeStart(tsk, ownerDateKey);
+              const end = taskRangeEnd(tsk, ownerDateKey);
+              const valInfo = getTaskValidation(start, tsk.status);
+              const rangeNote = (end !== start) ? ` [${start} → ${end}${!isStart ? ', continues' : ''}]` : '';
+              titleParts.push(`• [${start}${rangeNote}] ${tsk.text} (${stInfo ? stInfo.label : 'No status'} - ${valInfo.label})`);
             });
           }
           if(entry && entry.comment) titleParts.push('Comment: ' + entry.comment);
           chip.title = titleParts.join(' \n');
           
           let inner = escapeHtml(initials(m.name));
-          if(entry && entry.tasks && entry.tasks.length){
+          if(activeTasks.length){
             inner += `<span class="chip-dot" style="background:currentColor"></span>`;
           }
           chip.innerHTML = inner;
@@ -3646,9 +3747,27 @@ function getTaskValidation(taskDateStr, taskStatusId){
           dateInput.type = 'date';
           dateInput.className = 'task-date-input';
           dateInput.value = tsk.date || key;
-          dateInput.title = 'Task Date';
+          dateInput.title = 'Start date';
           dateInput.addEventListener('change', () => {
             tsk.date = dateInput.value;
+            if(tsk.endDate && tsk.endDate < tsk.date) tsk.endDate = tsk.date;
+            saveAndCommitTasks(member.id, key, entry);
+            renderTaskList();
+          });
+
+          const arrow = document.createElement('span');
+          arrow.className = 'task-date-arrow';
+          arrow.textContent = '→';
+
+          const endDateInput = document.createElement('input');
+          endDateInput.type = 'date';
+          endDateInput.className = 'task-end-date-input';
+          endDateInput.value = tsk.endDate || '';
+          endDateInput.min = tsk.date || key;
+          endDateInput.title = 'End date (optional) — set this to have a multi-day task carry over onto every day in between, without adding it again';
+          endDateInput.addEventListener('change', () => {
+            tsk.endDate = endDateInput.value || '';
+            if(tsk.endDate && tsk.endDate < (tsk.date || key)) tsk.endDate = tsk.date || key;
             saveAndCommitTasks(member.id, key, entry);
             renderTaskList();
           });
@@ -3705,10 +3824,20 @@ function getTaskValidation(taskDateStr, taskStatusId){
           });
 
           topDiv.appendChild(dateInput);
+          topDiv.appendChild(arrow);
+          topDiv.appendChild(endDateInput);
           topDiv.appendChild(txtInput);
           topDiv.appendChild(select);
           topDiv.appendChild(delBtn);
           itemRow.appendChild(topDiv);
+
+          if(tsk.endDate && tsk.endDate !== tsk.date){
+            const hint = document.createElement('div');
+            hint.className = 'task-range-hint';
+            hint.textContent = `Carries over onto every day from ${tsk.date} through ${tsk.endDate} — no need to add it again on those dates.`;
+            itemRow.appendChild(hint);
+          }
+
           tasksContainer.appendChild(itemRow);
         });
       }
@@ -3723,11 +3852,58 @@ function getTaskValidation(taskDateStr, taskStatusId){
     addTaskBtn.textContent = '+ Add Task';
     addTaskBtn.addEventListener('click', () => {
       if(!entry.tasks) entry.tasks = [];
-      entry.tasks.push({ id: uid('t'), date: key, text: '', status: getDefaultNewTaskStatusId() });
+      entry.tasks.push({ id: uid('t'), date: key, endDate: '', text: '', status: getDefaultNewTaskStatusId() });
       saveAndCommitTasks(member.id, key, entry);
       renderTaskList();
     });
     block.appendChild(addTaskBtn);
+
+    // Tasks that started on a different day but whose range (start → end
+    // date) still covers this day. Shown read-only here so a multi-day task
+    // carries over automatically instead of being re-added on each date.
+    const carriedTasks = getActiveTasksForMemberDate(member.id, key)
+      .filter(a => a.ownerDateKey !== key);
+    if(carriedTasks.length){
+      const carriedSection = document.createElement('div');
+      carriedSection.className = 'carried-section';
+
+      const carriedLabel = document.createElement('div');
+      carriedLabel.className = 'field-label';
+      carriedLabel.textContent = 'Carried over from other days';
+      carriedSection.appendChild(carriedLabel);
+
+      carriedTasks.forEach(({task: tsk, ownerDateKey}) => {
+        const start = taskRangeStart(tsk, ownerDateKey);
+        const end = taskRangeEnd(tsk, ownerDateKey);
+        const stInfo = findTag(taskStatuses, tsk.status);
+
+        const item = document.createElement('div');
+        item.className = 'carried-task-item';
+
+        const text = document.createElement('div');
+        text.className = 'carried-text';
+        text.textContent = (tsk.text || '(No description)') + (stInfo ? ` — ${stInfo.label}` : '');
+        item.appendChild(text);
+
+        const range = document.createElement('div');
+        range.className = 'carried-range';
+        range.textContent = `${start} → ${end}`;
+        item.appendChild(range);
+
+        const jumpBtn = document.createElement('button');
+        jumpBtn.type = 'button';
+        jumpBtn.className = 'carried-jump';
+        jumpBtn.textContent = 'Edit on ' + start;
+        jumpBtn.addEventListener('click', () => {
+          openModalForDate(ownerDateKey);
+        });
+        item.appendChild(jumpBtn);
+
+        carriedSection.appendChild(item);
+      });
+
+      block.appendChild(carriedSection);
+    }
 
     const commentLabel = document.createElement('div');
     commentLabel.className = 'field-label';
@@ -5162,14 +5338,16 @@ function getTaskValidation(taskDateStr, taskStatusId){
 
   // Pulls this member's tasks for a given week (Sun–Sat) straight out of the
   // in-memory scheduleData (the same object that's loaded from / saved to your
-  // JSON file), one entry per day.
+  // JSON file), one entry per day. Includes tasks that started on an earlier
+  // day but carry over (via endDate) onto this day, so a multi-day task shows
+  // up in every day it's active for — not just the day it was added on.
   function getMemberWeekEntries(memberId, weekStart){
     const days = [];
     for(let i=0;i<7;i++){
       const d = addDays(weekStart, i);
       const key = dateKey(d);
       const entry = scheduleData[memberId + '|' + key];
-      const tasks = (entry && Array.isArray(entry.tasks)) ? entry.tasks : [];
+      const tasks = getActiveTasksForMemberDate(memberId, key).map(a => a.task);
       const dayOfWeek = d.getDay();
       const isWeekend = (dayOfWeek === 0 || dayOfWeek === 6);
       const attendanceTagId = entry && entry.tag !== undefined && entry.tag !== '' ? entry.tag : (isWeekend ? 'at_jida8xir' : '');
@@ -5366,6 +5544,7 @@ function getTaskValidation(taskDateStr, taskStatusId){
           tasksArr = entry.tasks.map(tsk => ({
             id: tsk.id || uid('t'),
             date: tsk.date || defaultDate,
+            endDate: tsk.endDate ? String(tsk.endDate) : '',
             text: String(tsk.text || ''),
             status: String(tsk.status || '')
           }));
