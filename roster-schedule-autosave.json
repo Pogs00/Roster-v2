@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-27T00:47:19.296Z",
+  "exportedAt": "2026-08-27T00:53:56.641Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -112,6 +112,7 @@
         {
           "id": "t_sry14n5o",
           "date": "2026-08-17",
+          "endDate": "",
           "text": "BK Escario (JPOS Migration)",
           "status": "completed"
         }
@@ -124,24 +125,28 @@
         {
           "id": "t_kgu76fwi",
           "date": "2026-08-17",
+          "endDate": "",
           "text": "Retail Weekly Meeting @9am",
           "status": "ts_fnbk482o"
         },
         {
           "id": "t_zx6fc181",
           "date": "2026-08-17",
+          "endDate": "",
           "text": "Wendy's CMS Training",
           "status": "ts_fnbk482o"
         },
         {
           "id": "t_yep10fbk",
           "date": "2026-08-17",
+          "endDate": "",
           "text": "Quick Discussion with Dev team regarding Tori Sanwa Issue",
           "status": "completed"
         },
         {
           "id": "t_p6xm1e4w",
           "date": "2026-08-17",
+          "endDate": "",
           "text": "Configure Starbucks digital menu board",
           "status": "completed"
         }
@@ -154,6 +159,7 @@
         {
           "id": "t_e8vsjdkd",
           "date": "2026-08-18",
+          "endDate": "",
           "text": "BK Cabahug (JPOS Migration)",
           "status": "completed"
         }
@@ -166,24 +172,28 @@
         {
           "id": "t_k7wm2m3b",
           "date": "2026-08-18",
+          "endDate": "",
           "text": "The Moment Group Supy Demo @10am",
           "status": "completed"
         },
         {
           "id": "t_mtib8zh5",
           "date": "2026-08-18",
+          "endDate": "",
           "text": "Tori Sanwa Test Machine Configuration",
           "status": "ts_i4kzogvj"
         },
         {
           "id": "t_gqczi7wf",
           "date": "2026-08-18",
+          "endDate": "",
           "text": "Update Manhours report",
           "status": "completed"
         },
         {
           "id": "t_ht4tedhd",
           "date": "2026-08-18",
+          "endDate": "",
           "text": "WF Meeting",
           "status": "completed"
         }
@@ -201,54 +211,63 @@
         {
           "id": "t_g9dm8rw0",
           "date": "2026-08-19",
+          "endDate": "",
           "text": "PLK ATO demo @1:30pm",
           "status": "ts_fnbk482o"
         },
         {
           "id": "t_84nkvy9g",
           "date": "2026-08-19",
+          "endDate": "",
           "text": "Check Counter issues (Part 2)",
           "status": "ts_fnbk482o"
         },
         {
           "id": "t_l899makt",
           "date": "2026-08-19",
+          "endDate": "",
           "text": "Wendy's training confirmation",
           "status": "completed"
         },
         {
           "id": "t_0kpd367g",
           "date": "2026-08-19",
+          "endDate": "",
           "text": "Torikizoku presentation confirmation on 08/25/2026",
           "status": "completed"
         },
         {
           "id": "t_jvb7qzom",
           "date": "2026-08-19",
+          "endDate": "",
           "text": "Tori Sanwa tablet testing",
           "status": "completed"
         },
         {
           "id": "t_vqnx9sw2",
           "date": "2026-08-19",
+          "endDate": "",
           "text": "Aloha Meeting @10am",
           "status": "completed"
         },
         {
           "id": "t_kfatjwz3",
           "date": "2026-08-19",
+          "endDate": "",
           "text": "Slim Chicken Initial Meeting",
           "status": "completed"
         },
         {
           "id": "t_4f8irdor",
           "date": "2026-08-19",
+          "endDate": "",
           "text": "SM Event Meeting @1pm",
           "status": "completed"
         },
         {
           "id": "t_p1crgoh0",
           "date": "2026-08-19",
+          "endDate": "",
           "text": "Add images for Frosty Matcha and Matcha Coffee Wendy's Caltex Mega Station",
           "status": "completed"
         }
@@ -291,42 +310,49 @@
         {
           "id": "t_t82kmkuq",
           "date": "2026-08-20",
+          "endDate": "",
           "text": "Torikizoku KDS run through",
           "status": "completed"
         },
         {
           "id": "t_c1k1ifz3",
           "date": "2026-08-20",
+          "endDate": "",
           "text": "AFH Supy demo @11am",
           "status": "completed"
         },
         {
           "id": "t_wxnkn42i",
           "date": "2026-08-20",
+          "endDate": "",
           "text": "Tori Sanwa Monitoring - Check in with IT and store",
           "status": "completed"
         },
         {
           "id": "t_srj934tt",
           "date": "2026-08-20",
+          "endDate": "",
           "text": "Create list for Aloha project action plan",
           "status": "completed"
         },
         {
           "id": "t_7wysx1ib",
           "date": "2026-08-20",
+          "endDate": "",
           "text": "Email Let's for follow up of the pending deliverables",
           "status": "completed"
         },
         {
           "id": "t_9yf6fcrv",
           "date": "2026-08-20",
+          "endDate": "",
           "text": "Check Counter issues (Part 2) Meeting",
           "status": "completed"
         },
         {
           "id": "t_7tfflwcp",
           "date": "2026-08-20",
+          "endDate": "",
           "text": "Wendy's Caltex adding of new item in Aloha and SOK",
           "status": "completed"
         }
@@ -339,18 +365,21 @@
         {
           "id": "t_tfgxsbpy",
           "date": "2026-08-17",
+          "endDate": "",
           "text": "MenuX V2 Testing",
           "status": "ts_6jxo1r4g"
         },
         {
           "id": "t_yyjjbm7w",
           "date": "2026-08-17",
+          "endDate": "",
           "text": "Aloha Training",
           "status": "completed"
         },
         {
           "id": "t_r1nniyd1",
           "date": "2026-08-17",
+          "endDate": "",
           "text": "Fixing of BIR (continuation of other module)",
           "status": "ts_6jxo1r4g"
         }
@@ -363,24 +392,28 @@
         {
           "id": "t_jrhnzxok",
           "date": "2026-08-18",
+          "endDate": "",
           "text": "Fixing of BIR (continuation of other module)",
           "status": "ts_6jxo1r4g"
         },
         {
           "id": "t_ybq70u6q",
           "date": "2026-08-18",
+          "endDate": "",
           "text": "MenuX V2 Testing",
           "status": "ts_6jxo1r4g"
         },
         {
           "id": "t_cmabol8f",
           "date": "2026-08-18",
+          "endDate": "",
           "text": "Aloha Training",
           "status": "ts_fnbk482o"
         },
         {
           "id": "t_g6f9u400",
           "date": "2026-08-18",
+          "endDate": "",
           "text": "PLK price update issue",
           "status": "completed"
         }
@@ -393,18 +426,21 @@
         {
           "id": "t_0twvz7x9",
           "date": "2026-08-19",
+          "endDate": "",
           "text": "Plugins v12 Testing",
           "status": "ts_6jxo1r4g"
         },
         {
           "id": "t_hq72w96h",
           "date": "2026-08-19",
+          "endDate": "",
           "text": "MenuX V2 Testing",
           "status": "ts_6jxo1r4g"
         },
         {
           "id": "t_7wx6n30f",
           "date": "2026-08-19",
+          "endDate": "",
           "text": "Aloha Training",
           "status": "completed"
         }
@@ -417,6 +453,7 @@
         {
           "id": "t_0x98icsh",
           "date": "2026-08-20",
+          "endDate": "",
           "text": "BK Times (JPOS Migration)",
           "status": "completed"
         }
@@ -429,18 +466,21 @@
         {
           "id": "t_3tkwviup",
           "date": "2026-08-20",
+          "endDate": "",
           "text": "Plugins v12 Testing",
           "status": "ts_6jxo1r4g"
         },
         {
           "id": "t_2ge5983a",
           "date": "2026-08-20",
+          "endDate": "",
           "text": "MenuX V2 ",
           "status": "ts_6jxo1r4g"
         },
         {
           "id": "t_auctml5x",
           "date": "2026-08-20",
+          "endDate": "",
           "text": "Aoha Training",
           "status": "completed"
         }
@@ -453,18 +493,21 @@
         {
           "id": "t_23ya3v90",
           "date": "2026-08-24",
+          "endDate": "",
           "text": "Retail Meeting @9am",
           "status": "completed"
         },
         {
           "id": "t_dfudj9fn",
           "date": "2026-08-24",
+          "endDate": "",
           "text": "Ticket assignment",
           "status": "completed"
         },
         {
           "id": "t_hxfl7yio",
           "date": "2026-08-24",
+          "endDate": "",
           "text": "Wendy's CMS Training",
           "status": "completed"
         }
@@ -477,18 +520,21 @@
         {
           "id": "t_f7jmjbuj",
           "date": "2026-08-24",
+          "endDate": "",
           "text": "MenuX v2 testing",
           "status": "ts_6jxo1r4g"
         },
         {
           "id": "t_6vcm53pp",
           "date": "2026-08-24",
+          "endDate": "",
           "text": "Aloha Report Utility",
           "status": "ts_6jxo1r4g"
         },
         {
           "id": "t_kmxkriww",
           "date": "2026-08-24",
+          "endDate": "",
           "text": "Training Afternoon menux",
           "status": "completed"
         }
@@ -501,24 +547,28 @@
         {
           "id": "t_5dx66t3t",
           "date": "2026-08-24",
+          "endDate": "",
           "text": "Retail Meeting @9am",
           "status": "completed"
         },
         {
           "id": "t_b37uxbe9",
           "date": "2026-08-24",
+          "endDate": "",
           "text": "Ops Meeting @2pm",
           "status": "ts_fnbk482o"
         },
         {
           "id": "t_e4ybt7vp",
           "date": "2026-08-24",
+          "endDate": "",
           "text": "Tori Sanwa plugin update with S' Harmon",
           "status": "completed"
         },
         {
           "id": "t_huqd1r40",
           "date": "2026-08-24",
+          "endDate": "",
           "text": "Torikizoku run through before Aug 25 presentation",
           "status": "completed"
         }
@@ -531,12 +581,14 @@
         {
           "id": "t_6mvoiz2t",
           "date": "2026-08-27",
+          "endDate": "",
           "text": "menuX® Training",
           "status": "not-started"
         },
         {
           "id": "t_fxnsojvj",
           "date": "2026-08-27",
+          "endDate": "",
           "text": "Ticket assignment",
           "status": "not-started"
         }
@@ -549,18 +601,21 @@
         {
           "id": "t_tal545cy",
           "date": "2026-08-27",
+          "endDate": "",
           "text": "MenuX v2 testing",
           "status": "ts_6jxo1r4g"
         },
         {
           "id": "t_m6ga3g8c",
           "date": "2026-08-27",
+          "endDate": "",
           "text": "Aloha v12 plugins",
           "status": "ts_6jxo1r4g"
         },
         {
           "id": "t_3g8s97na",
           "date": "2026-08-27",
+          "endDate": "",
           "text": "Training new employee",
           "status": "ts_6jxo1r4g"
         }
@@ -573,18 +628,21 @@
         {
           "id": "t_iq0wf38i",
           "date": "2026-08-27",
+          "endDate": "",
           "text": "menuX® Training",
           "status": "not-started"
         },
         {
           "id": "t_zp7rtjf6",
           "date": "2026-08-27",
+          "endDate": "",
           "text": "Let's Eat Aloha and Plugin testing",
           "status": "not-started"
         },
         {
           "id": "t_p76a22k2",
           "date": "2026-08-27",
+          "endDate": "",
           "text": "Let's SOK and Digital Menu Board setup",
           "status": "not-started"
         }
@@ -597,24 +655,28 @@
         {
           "id": "t_j22iilt5",
           "date": "2026-08-25",
+          "endDate": "",
           "text": "Ticket assignment",
           "status": "completed"
         },
         {
           "id": "t_zcx9g5ix",
           "date": "2026-08-25",
+          "endDate": "",
           "text": "Tori Sanwa plugin update testing",
           "status": "completed"
         },
         {
           "id": "t_exonn8l8",
           "date": "2026-08-25",
+          "endDate": "",
           "text": "Tori Sanwa plugin update in store",
           "status": "completed"
         },
         {
           "id": "t_clmmzuno",
           "date": "2026-08-25",
+          "endDate": "",
           "text": "UCC Bridgetowne – BIR Report installation and Configuration",
           "status": "completed"
         }
@@ -632,12 +694,14 @@
         {
           "id": "t_824b7h4a",
           "date": "2026-08-25",
+          "endDate": "",
           "text": "Torikizoku KDS presentation and status update @1pm",
           "status": "completed"
         },
         {
           "id": "t_e88pesvt",
           "date": "2026-08-25",
+          "endDate": "",
           "text": "Tori Sanwa testing",
           "status": "completed"
         }
@@ -650,42 +714,49 @@
         {
           "id": "t_8z3n4jso",
           "date": "2026-08-26",
+          "endDate": "",
           "text": "Ticket assignment",
           "status": "completed"
         },
         {
           "id": "t_xy0qav7d",
           "date": "2026-08-26",
+          "endDate": "",
           "text": "UCC Bridgetown – License update and Coordination on how to get the ff ( Zread, Sales Summary and Ejournal)",
           "status": "completed"
         },
         {
           "id": "t_jxckqovj",
           "date": "2026-08-26",
+          "endDate": "",
           "text": "Support Meeting",
           "status": "completed"
         },
         {
           "id": "t_a7n1jfp5",
           "date": "2026-08-26",
+          "endDate": "",
           "text": "Assist on UCC store BIR concern",
           "status": "completed"
         },
         {
           "id": "t_t2197yg3",
           "date": "2026-08-26",
+          "endDate": "",
           "text": "Menux Item Update meeting",
           "status": "completed"
         },
         {
           "id": "t_9upt4tla",
           "date": "2026-08-26",
+          "endDate": "",
           "text": "Torisanwa update monitoring",
           "status": "completed"
         },
         {
           "id": "t_gyky8qg6",
           "date": "2026-08-26",
+          "endDate": "",
           "text": "Create Liquidation for Cebu JPOS rollout",
           "status": "completed"
         }
@@ -698,24 +769,28 @@
         {
           "id": "t_cbnmz62c",
           "date": "2026-08-26",
+          "endDate": "",
           "text": "MenuX v2 testing",
           "status": "ts_6jxo1r4g"
         },
         {
           "id": "t_rve9hj0p",
           "date": "2026-08-26",
+          "endDate": "",
           "text": "Aloha Report Utility",
           "status": "ts_6jxo1r4g"
         },
         {
           "id": "t_ki3fly7v",
           "date": "2026-08-26",
+          "endDate": "",
           "text": "Aloha v12 plugins",
           "status": "ts_6jxo1r4g"
         },
         {
           "id": "t_rzf5bbne",
           "date": "2026-08-26",
+          "endDate": "",
           "text": "Training new employee",
           "status": "ts_6jxo1r4g"
         }
@@ -728,24 +803,28 @@
         {
           "id": "t_7hppe2hu",
           "date": "2026-08-26",
+          "endDate": "",
           "text": "Tori Sanwa menuX® Meeting F2F @10am",
           "status": "completed"
         },
         {
           "id": "t_q5lr6ioi",
           "date": "2026-08-26",
+          "endDate": "",
           "text": "Create PPT presentation for Tori Sanwa",
           "status": "completed"
         },
         {
           "id": "t_q8e8bviv",
           "date": "2026-08-26",
+          "endDate": "",
           "text": "Create minutes of meeting and send it to all stakeholders",
           "status": "completed"
         },
         {
           "id": "t_u1fgeftx",
           "date": "2026-08-26",
+          "endDate": "",
           "text": "Task update with Dev",
           "status": "completed"
         }
@@ -758,6 +837,7 @@
         {
           "id": "t_42a1t3zo",
           "date": "2026-08-28",
+          "endDate": "",
           "text": "Ticket assignment",
           "status": "not-started"
         }
@@ -770,12 +850,14 @@
         {
           "id": "t_cnsaobzu",
           "date": "2026-08-28",
+          "endDate": "",
           "text": "MenuX v2 testing",
           "status": "not-started"
         },
         {
           "id": "t_0kgotaie",
           "date": "2026-08-28",
+          "endDate": "",
           "text": "Aloha v12 plugins",
           "status": "not-started"
         }
@@ -788,12 +870,14 @@
         {
           "id": "t_g0w80pft",
           "date": "2026-08-28",
+          "endDate": "",
           "text": "AI session @10am",
           "status": "not-started"
         },
         {
           "id": "t_11h9ag7n",
           "date": "2026-08-28",
+          "endDate": "",
           "text": "Torikizoku Assist API meeting @2pm",
           "status": "not-started"
         }
@@ -851,12 +935,14 @@
         {
           "id": "t_bg2cj381",
           "date": "2026-08-14",
+          "endDate": "",
           "text": "Wendy's Aloha Dave's Combo mod price update",
           "status": "completed"
         },
         {
           "id": "t_dy9zlb6q",
           "date": "2026-08-14",
+          "endDate": "",
           "text": "Wendy's void print out update",
           "status": "completed"
         }
@@ -869,6 +955,7 @@
         {
           "id": "t_35chu7sy",
           "date": "2026-08-14",
+          "endDate": "",
           "text": "Rain's training monitoring",
           "status": "completed"
         }
@@ -881,18 +968,21 @@
         {
           "id": "t_5mpqp062",
           "date": "2026-08-14",
+          "endDate": "",
           "text": "Starbuck menu board and CMS build up",
           "status": "completed"
         },
         {
           "id": "t_cifda9ca",
           "date": "2026-08-14",
+          "endDate": "",
           "text": "Email update for Let's and Tori Sanwa",
           "status": "completed"
         },
         {
           "id": "t_ceuwdehq",
           "date": "2026-08-14",
+          "endDate": "",
           "text": "Moved Torikizoku unit to Dev team and setup",
           "status": "completed"
         }
@@ -1235,6 +1325,7 @@
         {
           "id": "t_ib3px7ky",
           "date": "2026-08-23",
+          "endDate": "",
           "text": "S1 Duty",
           "status": "completed"
         }
