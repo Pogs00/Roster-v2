@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-27T06:32:27.708Z",
+  "exportedAt": "2026-08-27T06:33:27.691Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -904,6 +904,13 @@
           "date": "2026-09-02",
           "endDate": "",
           "text": "Let's Alignment Meeting @1pm",
+          "status": "not-started"
+        },
+        {
+          "id": "t_r3qiiv7d",
+          "date": "2026-09-02",
+          "endDate": "",
+          "text": "Wendy's Manual c",
           "status": "not-started"
         }
       ],
