@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-27T09:09:00.038Z",
+  "exportedAt": "2026-08-27T09:14:00.043Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -1485,9 +1485,19 @@
         "store": "Let's Eat Rockwell Pasig",
         "description": "Digital Menu Board Installation",
         "pointPerson": "Kent",
-        "status": "In Progress",
+        "status": "Not Started",
         "startDate": "2026-08-27",
         "endDate": "2026-09-01",
+        "reviseEndDate": "",
+        "remarks": []
+      },
+      {
+        "store": "All V19 Stores",
+        "description": "Standard Plugin Testing",
+        "pointPerson": "Lawrence",
+        "status": "In Progress",
+        "startDate": "2026-08-27",
+        "endDate": "2026-08-28",
         "reviseEndDate": "",
         "remarks": []
       }
