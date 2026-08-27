@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-27T08:57:27.284Z",
+  "exportedAt": "2026-08-27T08:58:27.281Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -525,7 +525,7 @@
           "date": "2026-08-27",
           "endDate": "",
           "text": "Ticket assignment",
-          "status": "not-started"
+          "status": "completed"
         }
       ],
       "comment": ""
@@ -557,10 +557,10 @@
           "date": "2026-08-27",
           "endDate": "2026-08-28",
           "text": "Let's SOK and Digital Menu Board setup",
-          "status": "in-progress"
+          "status": "not-started"
         }
       ],
-      "comment": ""
+      "comment": "SOK and Digital Menu Board not yet installed c/o Dev"
     },
     "m_lnyo2eed|2026-08-25": {
       "tag": "office",
