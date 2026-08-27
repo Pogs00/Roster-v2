@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-27T01:03:59.296Z",
+  "exportedAt": "2026-08-27T01:04:59.283Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -934,8 +934,16 @@
       "comment": ""
     },
     "m_jig7aydp|2026-09-02": {
-      "tag": "office",
-      "tasks": [],
+      "tag": "at_tljjo94f",
+      "tasks": [
+        {
+          "id": "t_d9f8bsdl",
+          "date": "2026-09-02",
+          "endDate": "",
+          "text": "Let's Alignment Meeting @1pm",
+          "status": "not-started"
+        }
+      ],
       "comment": ""
     },
     "m_lnyo2eed|2026-09-02": {
