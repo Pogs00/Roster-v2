@@ -2327,10 +2327,14 @@
   }
 
   // Validation logic: checks if task is completed/closed or if due date has passed compared to current date
-function getTaskValidation(taskDateStr, taskStatusId){
+function getTaskValidation(taskDateStr, taskStatusId, taskEndDateStr){
   const todayStr = dateKey(today);
+  // For a multi-day (carried-over) task, "delayed" should be judged against
+  // its end date, not the day it started — a 3-day task that started
+  // yesterday but still runs through tomorrow isn't overdue yet.
+  const dueDateStr = taskEndDateStr || taskDateStr;
 
-  if(!taskDateStr){
+  if(!dueDateStr){
     return {
       isDelayed: false,
       label: 'On Time',
@@ -2356,7 +2360,7 @@ function getTaskValidation(taskDateStr, taskStatusId){
     };
   }
 
-  if(taskDateStr < todayStr){
+  if(dueDateStr < todayStr){
     return {
       isDelayed: true,
       label: 'Delayed',
@@ -2370,7 +2374,6 @@ function getTaskValidation(taskDateStr, taskStatusId){
     class: 'ontime'
   };
 }
-``
 
   /* ---------------- toast ---------------- */
   let toastTimer = null;
@@ -2913,7 +2916,8 @@ function getTaskValidation(taskDateStr, taskStatusId){
           const stInfo = findTag(taskStatuses, tsk.status);
           const badgeBg = stInfo ? mixWithWhite(stInfo.color, 0.85) : '#F1F3F5';
           const badgeColor = stInfo ? darken(stInfo.color, 0.18) : '#667085';
-          const valInfo = getTaskValidation(tDate, tsk.status);
+          const valInfo = getTaskValidation(tDate, tsk.status, tsk.endDate);
+          const dateLabel = (tsk.endDate && tsk.endDate !== tDate) ? `${tDate} → ${tsk.endDate}` : tDate;
 
           let statusOptionsHtml = '<option value="">— Status —</option>';
           taskStatuses.forEach(st => {
@@ -2923,7 +2927,7 @@ function getTaskValidation(taskDateStr, taskStatusId){
           tasksHtml += `
             <div class="stat-task-row">
               <div class="stat-task-left">
-                <span class="stat-task-date">${escapeHtml(tDate)}</span>
+                <span class="stat-task-date">${escapeHtml(dateLabel)}</span>
                 <span class="stat-task-text" title="${escapeHtml(tsk.text || '(No description)')}">${escapeHtml(tsk.text || '(No description)')}</span>
               </div>
               <div class="stat-task-right">
@@ -3061,7 +3065,7 @@ function getTaskValidation(taskDateStr, taskStatusId){
             const stInfo = tsk.status ? findTag(taskStatuses, tsk.status) : null;
             const isCompleted = stInfo && (stInfo.label.toLowerCase().includes('complet') || stInfo.label.toLowerCase().includes('done'));
             if(isCompleted) completedTasks++;
-            const valInfo = getTaskValidation(tsk.date || k, tsk.status);
+            const valInfo = getTaskValidation(tsk.date || k, tsk.status, tsk.endDate);
             if(valInfo.isDelayed) memberDelayed++;
           });
         }
@@ -3470,7 +3474,7 @@ function getTaskValidation(taskDateStr, taskStatusId){
           const tDate = tsk.date || tsk.logDate;
           const stInfo = findTag(taskStatuses, tsk.status);
           const stLabel = stInfo ? stInfo.label : 'No Status';
-          const valInfo = getTaskValidation(tDate, tsk.status);
+          const valInfo = getTaskValidation(tDate, tsk.status, tsk.endDate);
 
           doc.setFont('helvetica', 'bold');
           doc.setFontSize(9);
@@ -3620,7 +3624,7 @@ function getTaskValidation(taskDateStr, taskStatusId){
               const stInfo = findTag(taskStatuses, tsk.status);
               const start = taskRangeStart(tsk, ownerDateKey);
               const end = taskRangeEnd(tsk, ownerDateKey);
-              const valInfo = getTaskValidation(start, tsk.status);
+              const valInfo = getTaskValidation(start, tsk.status, end);
               const rangeNote = (end !== start) ? ` [${start} → ${end}${!isStart ? ', continues' : ''}]` : '';
               titleParts.push(`• [${start}${rangeNote}] ${tsk.text} (${stInfo ? stInfo.label : 'No status'} - ${valInfo.label})`);
             });
@@ -3648,10 +3652,6 @@ function getTaskValidation(taskDateStr, taskStatusId){
       cell.addEventListener('click', ()=> openModalForDate(key));
       calGrid.appendChild(cell);
     }
-  }
-
-  function hasTasksOrChip(entry){
-    return entry && ((entry.tasks && entry.tasks.length > 0) || entry.comment);
   }
 
   /* ---------------- day editor modal ---------------- */
@@ -4111,7 +4111,7 @@ function getTaskValidation(taskDateStr, taskStatusId){
             const statusInfo = tsk.status ? (findTag(taskStatuses, tsk.status) || {label:tsk.status,color:'#98A2B3'}) : null;
             const start = taskRangeStart(tsk, ownerDateKey);
             const end = taskRangeEnd(tsk, ownerDateKey);
-            const valInfo = getTaskValidation(start, tsk.status);
+            const valInfo = getTaskValidation(start, tsk.status, end);
             const p = document.createElement('div');
             p.className = 'rd-text';
             let taskHtml = `• Task: ${escapeHtml(tsk.text || '(No description)')}`;
@@ -4179,7 +4179,7 @@ function getTaskValidation(taskDateStr, taskStatusId){
             const statusInfo = tsk.status ? findTag(taskStatuses, tsk.status) : null;
             const start = taskRangeStart(tsk, ownerDateKey);
             const end = taskRangeEnd(tsk, ownerDateKey);
-            const valInfo = getTaskValidation(start, tsk.status);
+            const valInfo = getTaskValidation(start, tsk.status, end);
             const statusColorTag = statusInfo ? ' {color:' + getStatusColorHex(statusInfo) + '}' : '';
             const carryTag = !isStart ? ' [Carried over from ' + start + ']' : '';
             lines.push(`    * Task: ${tsk.text || '(No description)'} (${statusInfo ? statusInfo.label : 'No status'}${statusColorTag}) [${valInfo.label}]${carryTag}`);
@@ -4233,10 +4233,11 @@ function getTaskValidation(taskDateStr, taskStatusId){
         if(activeTasks.length){
           activeTasks.forEach(({task: tsk, ownerDateKey, isStart}) => {
             const taskDate = taskRangeStart(tsk, ownerDateKey);
+            const taskEndDate = taskRangeEnd(tsk, ownerDateKey);
             const statusInfo = tsk.status ? findTag(taskStatuses, tsk.status) : null;
             const statusLabel = statusInfo ? statusInfo.label : '';
             const statusColor = statusInfo ? getStatusColorHex(statusInfo) : '';
-            const valInfo = getTaskValidation(taskDate, tsk.status);
+            const valInfo = getTaskValidation(taskDate, tsk.status, taskEndDate);
             const row = [
               dateStr,
               taskDate,
@@ -5430,7 +5431,7 @@ function getTaskValidation(taskDateStr, taskStatusId){
         const stInfo = findTag(taskStatuses, tsk.status);
         const statusEmoji = stInfo ? colorToEmoji(stInfo.color) : '⬜';
         const taskDate = tsk.date || dateKey(day.date);
-        const valInfo = getTaskValidation(taskDate, tsk.status);
+        const valInfo = getTaskValidation(taskDate, tsk.status, tsk.endDate);
         const delayEmoji = valInfo.isDelayed ? '🔴' : '🟢';
         return `   - ${tsk.text || '(No description)'} ${statusEmoji} [${stInfo ? stInfo.label : 'No status'}] ${delayEmoji} [${valInfo.label}]`;
       }).join('\n');
@@ -5465,7 +5466,7 @@ function getTaskValidation(taskDateStr, taskStatusId){
         if(!entry || !entry.tasks || !entry.tasks.length) return;
         entry.tasks.forEach(tsk=>{
           const taskDate = tsk.date || entryKey.split('|')[1];
-          const valInfo = getTaskValidation(taskDate, tsk.status);
+          const valInfo = getTaskValidation(taskDate, tsk.status, tsk.endDate);
           if(valInfo.isDelayed){
             items.push({ text: tsk.text || '(No description)', date: taskDate, status: tsk.status });
           }
