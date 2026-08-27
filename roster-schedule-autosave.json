@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-27T00:57:59.329Z",
+  "exportedAt": "2026-08-27T00:58:59.325Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -397,18 +397,11 @@
           "status": "ts_6jxo1r4g"
         },
         {
-          "id": "t_ybq70u6q",
-          "date": "2026-08-18",
-          "endDate": "",
-          "text": "MenuX V2 Testing",
-          "status": "ts_6jxo1r4g"
-        },
-        {
           "id": "t_cmabol8f",
           "date": "2026-08-18",
-          "endDate": "",
+          "endDate": "2026-08-28",
           "text": "Aloha Training",
-          "status": "ts_fnbk482o"
+          "status": "in-progress"
         },
         {
           "id": "t_g6f9u400",
@@ -426,15 +419,8 @@
         {
           "id": "t_0twvz7x9",
           "date": "2026-08-19",
-          "endDate": "",
+          "endDate": "2026-08-28",
           "text": "Plugins v12 Testing",
-          "status": "ts_6jxo1r4g"
-        },
-        {
-          "id": "t_hq72w96h",
-          "date": "2026-08-19",
-          "endDate": "",
-          "text": "MenuX V2 Testing",
           "status": "ts_6jxo1r4g"
         },
         {
