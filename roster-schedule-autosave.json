@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-27T09:14:00.043Z",
+  "exportedAt": "2026-08-27T09:19:00.831Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -1315,6 +1315,10 @@
           {
             "date": "8/25/2026, 7:46:07 AM",
             "text": "No feedback"
+          },
+          {
+            "date": "8/27/2026, 5:18:04 PM",
+            "text": "Per confirmation with M' Yeng, waiting for testing result c/o Jay"
           }
         ]
       },
@@ -1338,6 +1342,10 @@
           {
             "date": "8/25/2026, 7:45:59 AM",
             "text": "No feedback"
+          },
+          {
+            "date": "8/27/2026, 5:18:33 PM",
+            "text": "Per confirmation with M' Yeng, waiting for testing result c/o Jay"
           }
         ]
       },
@@ -1497,9 +1505,29 @@
         "pointPerson": "Lawrence",
         "status": "In Progress",
         "startDate": "2026-08-27",
-        "endDate": "2026-08-28",
+        "endDate": "2026-09-04",
         "reviseEndDate": "",
-        "remarks": []
+        "remarks": [
+          {
+            "date": "8/27/2026, 5:16:25 PM",
+            "text": "Test Aloha QS v19.9 Plugin - Header and Footer - ok - SCD - ok - PWD - ok - Diplomat - ok - NACD - with error - Ejournal - ok - Receipt presentation - ok"
+          }
+        ]
+      },
+      {
+        "store": "All V19 Stores",
+        "description": "Standard BIR Report Utility",
+        "pointPerson": "Lawrence",
+        "status": "Not Started",
+        "startDate": "2026-09-01",
+        "endDate": "2026-09-04",
+        "reviseEndDate": "",
+        "remarks": [
+          {
+            "date": "8/27/2026, 5:16:49 PM",
+            "text": "Not yet available"
+          }
+        ]
       }
     ]
   }
