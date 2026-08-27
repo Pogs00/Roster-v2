@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-27T00:59:59.322Z",
+  "exportedAt": "2026-08-27T01:00:59.323Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -441,29 +441,7 @@
     },
     "m_00tz16bv|2026-08-20": {
       "tag": "office",
-      "tasks": [
-        {
-          "id": "t_3tkwviup",
-          "date": "2026-08-20",
-          "endDate": "",
-          "text": "Plugins v12 Testing",
-          "status": "ts_6jxo1r4g"
-        },
-        {
-          "id": "t_2ge5983a",
-          "date": "2026-08-20",
-          "endDate": "",
-          "text": "MenuX V2 ",
-          "status": "ts_6jxo1r4g"
-        },
-        {
-          "id": "t_auctml5x",
-          "date": "2026-08-20",
-          "endDate": "",
-          "text": "Aoha Training",
-          "status": "completed"
-        }
-      ],
+      "tasks": [],
       "comment": ""
     },
     "m_lnyo2eed|2026-08-24": {
@@ -502,13 +480,6 @@
           "endDate": "2026-08-28",
           "text": "Aloha Report Utility",
           "status": "ts_6jxo1r4g"
-        },
-        {
-          "id": "t_kmxkriww",
-          "date": "2026-08-24",
-          "endDate": "",
-          "text": "Training Afternoon menux",
-          "status": "completed"
         }
       ],
       "comment": ""
@@ -750,7 +721,7 @@
           "date": "2026-08-26",
           "endDate": "2026-08-28",
           "text": "Aloha v12 Plugin Testing",
-          "status": "not-started"
+          "status": "ts_6jxo1r4g"
         }
       ],
       "comment": "SL"
