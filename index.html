@@ -3859,17 +3859,6 @@ function getTaskValidation(taskDateStr, taskStatusId, taskEndDateStr){
           topDiv.appendChild(delBtn);
           itemRow.appendChild(topDiv);
 
-          const commentInput = document.createElement('input');
-          commentInput.type = 'text';
-          commentInput.placeholder = 'Task comment...';
-          commentInput.value = tsk.comment || '';
-          commentInput.maxLength = 200;
-          commentInput.addEventListener('input', () => {
-            tsk.comment = commentInput.value;
-            saveAndCommitTasks(member.id, key, entry);
-          });
-          itemRow.appendChild(commentInput);
-
           if(tsk.endDate && tsk.endDate !== tsk.date){
             const hint = document.createElement('div');
             hint.className = 'task-range-hint';
@@ -3891,7 +3880,7 @@ function getTaskValidation(taskDateStr, taskStatusId, taskEndDateStr){
     addTaskBtn.textContent = '+ Add Task';
     addTaskBtn.addEventListener('click', () => {
       if(!entry.tasks) entry.tasks = [];
-      entry.tasks.push({ id: uid('t'), date: key, endDate: '', text: '', status: getDefaultNewTaskStatusId(), comment: '' });
+      entry.tasks.push({ id: uid('t'), date: key, endDate: '', text: '', status: getDefaultNewTaskStatusId() });
       saveAndCommitTasks(member.id, key, entry);
       renderTaskList();
     });
@@ -5586,8 +5575,7 @@ function getTaskValidation(taskDateStr, taskStatusId, taskEndDateStr){
             date: tsk.date || defaultDate,
             endDate: tsk.endDate ? String(tsk.endDate) : '',
             text: String(tsk.text || ''),
-            status: String(tsk.status || ''),
-            comment: String(tsk.comment || '')
+            status: String(tsk.status || '')
           }));
         } else if(entry.note){
           tasksArr.push({ id: uid('t'), date: defaultDate, text: entry.note, status: entry.taskStatus || '' });
