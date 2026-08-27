@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-27T00:58:59.325Z",
+  "exportedAt": "2026-08-27T00:59:59.322Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -417,13 +417,6 @@
       "tag": "office",
       "tasks": [
         {
-          "id": "t_0twvz7x9",
-          "date": "2026-08-19",
-          "endDate": "2026-08-28",
-          "text": "Plugins v12 Testing",
-          "status": "ts_6jxo1r4g"
-        },
-        {
           "id": "t_7wx6n30f",
           "date": "2026-08-19",
           "endDate": "",
@@ -751,6 +744,13 @@
           "endDate": "2026-08-28",
           "text": "Training new employee",
           "status": "ts_6jxo1r4g"
+        },
+        {
+          "id": "t_fpj9bqmk",
+          "date": "2026-08-26",
+          "endDate": "2026-08-28",
+          "text": "Aloha v12 Plugin Testing",
+          "status": "not-started"
         }
       ],
       "comment": "SL"
