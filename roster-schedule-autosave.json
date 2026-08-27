@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-27T09:34:51.097Z",
+  "exportedAt": "2026-08-27T09:39:51.068Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -179,9 +179,9 @@
         {
           "id": "t_mtib8zh5",
           "date": "2026-08-18",
-          "endDate": "",
+          "endDate": "2026-08-19",
           "text": "Tori Sanwa Test Machine Configuration",
-          "status": "ts_i4kzogvj"
+          "status": "completed"
         },
         {
           "id": "t_gqczi7wf",
@@ -234,13 +234,6 @@
           "date": "2026-08-19",
           "endDate": "",
           "text": "Torikizoku presentation confirmation on 08/25/2026",
-          "status": "completed"
-        },
-        {
-          "id": "t_jvb7qzom",
-          "date": "2026-08-19",
-          "endDate": "",
-          "text": "Tori Sanwa tablet testing",
           "status": "completed"
         },
         {
@@ -379,7 +372,7 @@
         {
           "id": "t_r1nniyd1",
           "date": "2026-08-17",
-          "endDate": "2026-08-28",
+          "endDate": "2026-08-26",
           "text": "Aloha Report Utility",
           "status": "ts_6jxo1r4g"
         }
@@ -389,13 +382,6 @@
     "m_00tz16bv|2026-08-18": {
       "tag": "office",
       "tasks": [
-        {
-          "id": "t_jrhnzxok",
-          "date": "2026-08-18",
-          "endDate": "",
-          "text": "Fixing of BIR (continuation of other module)",
-          "status": "ts_6jxo1r4g"
-        },
         {
           "id": "t_cmabol8f",
           "date": "2026-08-18",
