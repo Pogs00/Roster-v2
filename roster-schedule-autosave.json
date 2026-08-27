@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-27T00:56:59.330Z",
+  "exportedAt": "2026-08-27T00:57:59.329Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -365,7 +365,7 @@
         {
           "id": "t_tfgxsbpy",
           "date": "2026-08-17",
-          "endDate": "",
+          "endDate": "2026-08-28",
           "text": "MenuX V2 Testing",
           "status": "ts_6jxo1r4g"
         },
@@ -517,13 +517,6 @@
     "m_00tz16bv|2026-08-24": {
       "tag": "office",
       "tasks": [
-        {
-          "id": "t_f7jmjbuj",
-          "date": "2026-08-24",
-          "endDate": "2026-08-28",
-          "text": "MenuX v2 testing",
-          "status": "ts_6jxo1r4g"
-        },
         {
           "id": "t_6vcm53pp",
           "date": "2026-08-24",
