@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-27T00:16:57.507Z",
+  "exportedAt": "2026-08-27T00:17:56.827Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -547,22 +547,16 @@
       "tag": "at_7v4aujf5",
       "tasks": [
         {
-          "id": "t_a87d34cb",
-          "date": "2026-08-27",
-          "text": "menuX® Training",
-          "status": "not-started"
-        },
-        {
           "id": "t_tal545cy",
           "date": "2026-08-27",
           "text": "MenuX v2 testing",
-          "status": "not-started"
+          "status": "ts_6jxo1r4g"
         },
         {
           "id": "t_m6ga3g8c",
           "date": "2026-08-27",
           "text": "Aloha v12 plugins",
-          "status": "not-started"
+          "status": "ts_6jxo1r4g"
         },
         {
           "id": "t_3g8s97na",
