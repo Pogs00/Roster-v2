@@ -1,6 +1,6 @@
 {
   "app": "roster-team-schedule",
-  "exportedAt": "2026-08-27T00:10:59.282Z",
+  "exportedAt": "2026-08-27T00:11:59.283Z",
   "members": [
     {
       "id": "m_jig7aydp",
@@ -544,7 +544,7 @@
       "comment": ""
     },
     "m_00tz16bv|2026-08-27": {
-      "tag": "office",
+      "tag": "at_7v4aujf5",
       "tasks": [
         {
           "id": "t_a87d34cb",
@@ -571,7 +571,7 @@
           "status": "not-started"
         }
       ],
-      "comment": ""
+      "comment": "SL"
     },
     "m_jig7aydp|2026-08-27": {
       "tag": "office",
